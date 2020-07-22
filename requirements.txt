@@ -1,0 +1,2 @@
+inforion==2.21.234
+PySimpleGUI==4.26.0

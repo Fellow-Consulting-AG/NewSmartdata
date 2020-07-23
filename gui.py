@@ -7,7 +7,7 @@ import inforion as infor
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
 sg.set_options(font=appFont)
-
+sg.theme('Topanga')
 
 def show_main():
 
@@ -16,6 +16,9 @@ def show_main():
     # METER_REASON_REACHED_MAX = "finished"
     METER_OK = True
     # METER_STOPPED = False
+
+    menu_def = [['File', ['Open', 'Save', 'Exit', 'Properties']],
+                ['Help', 'About...'],]      
 
     col1 = Column([
     # Logon frame
@@ -32,7 +35,9 @@ def show_main():
                                      ], )]])], ], )
 
 
-    layout = [[col1], [Button("Execute"), Button("Cancel")]]
+    layout = [
+        [sg.Menu(menu_def, tearoff=True, pad=(200, 1))],  
+        [col1], [Button("Execute"), Button("Cancel")]]
 
     window = sg.Window("M3 Import Data", layout, margins=(10, 10))
 

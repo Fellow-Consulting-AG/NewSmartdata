@@ -1,4 +1,4 @@
-name: Python Windows App
+name: Windows App
 
 on:
   push:

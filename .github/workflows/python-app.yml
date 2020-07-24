@@ -32,3 +32,4 @@ jobs:
     - name: Build App
       run: |
         python setup.py py2app
+        ls  /Users/runner/work/NewSmartdata/NewSmartdata/dist

@@ -3,7 +3,7 @@ import py2exe
 
 setup(
 	windows=[{
-		"script": "main.py",
+		"script": "gui.py",
 		# "icon_resources": [(1, "icon.ico")],
 	}],
 	options={

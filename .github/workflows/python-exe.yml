@@ -34,4 +34,3 @@ jobs:
         python setup_exe.py py2exe
         SET var=%cd%
         ECHO %var%
-        DIR %var%

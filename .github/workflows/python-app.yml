@@ -33,3 +33,7 @@ jobs:
       run: |
         python setup.py py2app
         ls  /Users/runner/work/NewSmartdata/NewSmartdata/dist
+    - uses: actions/upload-artifact@v2
+      with:
+        name: NewSmartdata.app
+        path: /Users/runner/work/NewSmartdata/NewSmartdata/dist/NewSmartdata.app

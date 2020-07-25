@@ -31,5 +31,5 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller gui.py
+        pyinstaller gui.py --name NewSmartdata
         dir dist/gui

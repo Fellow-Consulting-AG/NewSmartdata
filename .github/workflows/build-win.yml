@@ -32,4 +32,4 @@ jobs:
     - name: Build App
       run: |
         pyinstaller gui.py
-        dir dist
+        dir dist/gui

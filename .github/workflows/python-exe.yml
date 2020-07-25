@@ -32,5 +32,4 @@ jobs:
     - name: Build Exe
       run: |
         python setup_exe.py py2exe
-        SET var=%cd%
-        ECHO %var%
+        dir

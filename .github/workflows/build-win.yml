@@ -32,4 +32,8 @@ jobs:
     - name: Build App
       run: |
         pyinstaller gui.py --name NewSmartdata
-        dir dist/gui
+        dir dist/NewSmartdata
+    - uses: actions/upload-artifact@v2
+      with:
+        name: NewSmartdata.exe
+        path: dist/NewSmartdata/NewSmartdata.exe

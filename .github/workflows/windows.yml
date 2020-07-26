@@ -31,7 +31,7 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller gui.py --name NewSmartdata
+        pyinstaller gui.py --name NewSmartdata --upx-exclude"vcruntime140.dll"
         dir dist/NewSmartdata
     - uses: actions/upload-artifact@v2
       with:

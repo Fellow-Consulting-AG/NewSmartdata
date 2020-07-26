@@ -36,4 +36,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: NewSmartdata.exe
-        path: dist/NewSmartdata/NewSmartdata.exe
+        path: dist/NewSmartdata.exe

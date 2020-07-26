@@ -32,7 +32,7 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller gui.py --name NewSmartdata
+        pyinstaller --clean --win-private-assemblies -F gui.py --name NewSmartdata
         dir dist/NewSmartdata
     - uses: actions/upload-artifact@v2
       with:

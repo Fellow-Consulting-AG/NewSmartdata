@@ -40,5 +40,4 @@ jobs:
         file: dist/NewSmartdata.app
         asset_name: NewSmartdata.app
         tag: ${{ github.ref }}
-        overwrite: true
         body: ""

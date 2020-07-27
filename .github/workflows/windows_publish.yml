@@ -39,5 +39,4 @@ jobs:
         file: dist/NewSmartdata.exe
         asset_name: NewSmartdata.exe
         tag: ${{ github.ref }}
-        overwrite: true
         body: ""

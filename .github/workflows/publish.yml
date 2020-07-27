@@ -9,7 +9,7 @@ jobs:
 
   build-macos:
     name: Publish macOS binaries
-   runs-on: macOS-latest
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v2

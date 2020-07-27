@@ -8,8 +8,43 @@ on:
 jobs:
 
   build-macos:
-    name: Publish binaries
-    runs-on: macOS-latest
+    name: Publish macOS binaries
+   runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest py2app
+        pip install -r requirements.txt
+    - name: Lint with flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+#    - name: Test with pytest
+#      run: |
+#        pytest
+    - name: Build App
+      run: |
+        python setup.py py2app
+        ls  /Users/runner/work/NewSmartdata/NewSmartdata/dist
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: dist/NewSmartdata.app
+        asset_name: NewSmartdata.app
+        tag: ${{ github.ref }}
+        body: ""
+
+  build-windows:
+    name: Publish Windows binaries
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -30,50 +65,14 @@ jobs:
 #    - name: Test with pytest
 #      run: |
 #        pytest
-    - name: Build App
+    - name: Build Exe
       run: |
-        python setup.py py2app
-        ls  dist
+        pyinstaller --clean --win-private-assemblies -F gui.py --name NewSmartdata
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: dist/NewSmartdata.app
-        asset_name: NewSmartdata.app
+        file: dist/NewSmartdata.exe
+        asset_name: NewSmartdata.exe
         tag: ${{ github.ref }}
         body: ""
-
-#  build-windows:
-#    name: Publish binaries
-#    runs-on: windows-latest
-#
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Set up Python 3.8
-#      uses: actions/setup-python@v2
-#      with:
-#        python-version: 3.8
-#    - name: Install dependencies
-#      run: |
-#        python -m pip install --upgrade pip
-#        pip install flake8 pytest
-#        pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
-#        pip install -r requirements.txt
-#    - name: Lint with flake8
-#      run: |
-#        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-#        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-##    - name: Test with pytest
-##      run: |
-##        pytest
-#    - name: Build Exe
-#      run: |
-#        pyinstaller --clean --win-private-assemblies -F gui.py --name NewSmartdata
-#    - name: Upload binaries to release
-#      uses: svenstaro/upload-release-action@v2
-#      with:
-#        repo_token: ${{ secrets.GITHUB_TOKEN }}
-#        file: dist/NewSmartdata.exe
-#        asset_name: NewSmartdata.exe
-#        tag: ${{ github.ref }}
-#        body: ""

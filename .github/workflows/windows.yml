@@ -2,7 +2,7 @@ name: Windows App
 
 on:
   push:
-    branches: [ $default-branch, add-github-actions]
+    branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
 

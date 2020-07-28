@@ -26,20 +26,26 @@ def show_main():
 
     col1 = Column([
         # Logon frame
-        [Frame('Logon information', [[Text(), Column([[Text('ION File:', size=(14,1)), Input(key='-ION-FILE-'), FileBrowse(file_types=("ION API File", "*.ionapi"))],
-                                                      [Text('M3 Company/Div:'), Input(key='-M3-COMPANY-', size=(5,1)), Input(key='-M3-DIV-',size=(7,1))], ])]])],
+        [Frame('Logon information', [[Text(), Column([[Text('ION File:', size=(14, 1)), Input(key='-ION-FILE-'), FileBrowse(file_types=("ION API File", "*.ionapi"))],
+                                                      [Text('M3 Company/Div:'), Input(key='-M3-COMPANY-', size=(5, 1)), Input(key='-M3-DIV-', size=(7, 1))], ])]])],
         # Information frame
-        [Frame('Input Data', [[Text(), Column([[Text('URL:', size=(14,1)), Input(key='-ION-URL-')],
-                                         [Text('Program:', size=(14,1)), Input(key='-ION-Program-')],
-                                         [Text('Method:', size=(14,1)), Input(key='-ION-METHOD-')],
-                                         [Text('Input File:', size=(14,1)), Input(key='-INPUT-FILE-'), FileBrowse()],
-                                         [Text('Output File:', size=(14,1)), Input(key='-OUTPUT-FILE-'), FileBrowse()],
-                                         [Text('Begin on line:', size=(14,1)), Input(key='-ION-BEGIN-', enable_events=True)],
-                                         [Text('End on line:', size=(14,1)), Input(key='-ION-END-', enable_events=True)],
-                                         ], )]])], ], )
+        [Frame('Input Data', [[Text(), Column([[Text('URL:', size=(14, 1)), Input(key='-ION-URL-')],
+                                               [Text('Program:', size=(14, 1)), Input(
+                                                   key='-ION-Program-')],
+                                               [Text('Method:', size=(14, 1)), Input(
+                                                   key='-ION-METHOD-')],
+                                               [Text('Input File:', size=(14, 1)), Input(
+                                                   key='-INPUT-FILE-'), FileBrowse()],
+                                               [Text('Output File:', size=(14, 1)), Input(
+                                                   key='-OUTPUT-FILE-'), FileBrowse()],
+                                               [Text('Begin on line:', size=(14, 1)), Input(
+                                                   key='-ION-BEGIN-', enable_events=True)],
+                                               [Text('End on line:', size=(14, 1)), Input(
+                                                   key='-ION-END-', enable_events=True)],
+                                               ], )]])], ], )
 
     layout = [
-        [sg.Menu(menu_def, tearoff=True, pad=(200, 1))],  
+        [sg.Menu(menu_def, tearoff=True, pad=(200, 1))],
         [col1], [Button("Execute"), Button("Cancel")]
     ]
 
@@ -53,8 +59,9 @@ def show_main():
 
         if event in ("-ION-BEGIN-", "-ION-END-"):
             if values[event] and values[event][-1] not in ("0123456789"):
-                sg.popup_quick_message("Please enter a valid row number", keep_on_top=True, text_color='red', no_titlebar=True)
-        
+                sg.popup_quick_message(
+                    "Please enter a valid row number", keep_on_top=True, text_color='red', no_titlebar=True)
+
         if event == "Execute":
 
             url = values["-ION-URL-"]
@@ -67,7 +74,7 @@ def show_main():
                 start = int(values["-ION-BEGIN-"])
             else:
                 start = 0
-            
+
             if values["-ION-END-"]:
                 end = int(values["-ION-END-"])
             else:
@@ -76,7 +83,8 @@ def show_main():
             if infor.filehandling.checkfile_exists(inputfile):
                 dataframe = pd.read_excel(inputfile, dtype=str)
             else:
-                sg.popup_quick_message("Input File not found", keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message(
+                    "Input File not found", keep_on_top=True, text_color='red', no_titlebar=True)
                 METER_OK = False
 
             if METER_OK:
@@ -111,7 +119,8 @@ def show_main():
 
 
 def on_progress(total, processed):
-    sg.one_line_progress_meter("My 1-line progress meter", processed, total, "single")
+    sg.one_line_progress_meter(
+        "My 1-line progress meter", processed, total, "single")
 
 
 def open_about():

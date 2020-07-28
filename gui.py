@@ -62,7 +62,8 @@ def show_main():
     METER_OK = True
     # METER_STOPPED = False
 
-    menu_def = [["File", ["Save", "Load", "Exit"]], ["Help", ["About", "Help"]]]
+    menu_def = [["File", ["Save", "Load", "Exit"]],
+                ["Help", ["About", "Help"]]]
 
     col1 = Column(
         [
@@ -70,76 +71,66 @@ def show_main():
             [
                 Frame(
                     "Logon information",
-                    [
-                        [
-                            Text(),
-                            Column(
-                                [
-                                    [
-                                        Text("ION File:", size=(14, 1)),
-                                        Input(key="-ION-FILE-"),
-                                        FileBrowse(
-                                            file_types=("ION API File", "*.ionapi")
-                                        ),
-                                    ],
-                                    [
-                                        Text("M3 Company/Div:"),
-                                        Input(key="-M3-COMPANY-", size=(5, 1)),
-                                        Input(key="-M3-DIV-", size=(7, 1)),
-                                    ],
-                                ]
-                            ),
-                        ]
-                    ],
+                    [[
+                        Text(),
+                        Column([
+                            [
+                                Text("ION File:", size=(14, 1)),
+                                Input(key="-ION-FILE-"),
+                                FileBrowse(file_types=("ION API File",
+                                                       "*.ionapi")),
+                            ],
+                            [
+                                Text("M3 Company/Div:"),
+                                Input(key="-M3-COMPANY-", size=(5, 1)),
+                                Input(key="-M3-DIV-", size=(7, 1)),
+                            ],
+                        ]),
+                    ]],
                 )
             ],
             # Information frame
             [
                 Frame(
                     "Input Data",
-                    [
-                        [
-                            Text(),
-                            Column(
-                                [
-                                    [
-                                        Text("URL:", size=(14, 1)),
-                                        Input(key="-ION-URL-"),
-                                    ],
-                                    [
-                                        Text("Program:", size=(14, 1)),
-                                        Input(key="-ION-Program-"),
-                                    ],
-                                    [
-                                        Text("Method:", size=(14, 1)),
-                                        Input(key="-ION-METHOD-"),
-                                    ],
-                                    [
-                                        Text("Input File:", size=(14, 1)),
-                                        Input(key="-INPUT-FILE-"),
-                                        FileBrowse(),
-                                    ],
-                                    [
-                                        Text("Output File:", size=(14, 1)),
-                                        Input(key="-OUTPUT-FILE-"),
-                                        FileBrowse(),
-                                    ],
-                                    [
-                                        Text("Begin on line:", size=(14, 1)),
-                                        Input(key="-ION-BEGIN-", enable_events=True),
-                                    ],
-                                    [
-                                        Text("End on line:", size=(14, 1)),
-                                        Input(key="-ION-END-", enable_events=True),
-                                    ],
-                                ],
-                            ),
-                        ]
-                    ],
+                    [[
+                        Text(),
+                        Column([
+                            [
+                                Text("URL:", size=(14, 1)),
+                                Input(key="-ION-URL-"),
+                            ],
+                            [
+                                Text("Program:", size=(14, 1)),
+                                Input(key="-ION-Program-"),
+                            ],
+                            [
+                                Text("Method:", size=(14, 1)),
+                                Input(key="-ION-METHOD-"),
+                            ],
+                            [
+                                Text("Input File:", size=(14, 1)),
+                                Input(key="-INPUT-FILE-"),
+                                FileBrowse(),
+                            ],
+                            [
+                                Text("Output File:", size=(14, 1)),
+                                Input(key="-OUTPUT-FILE-"),
+                                FileBrowse(),
+                            ],
+                            [
+                                Text("Begin on line:", size=(14, 1)),
+                                Input(key="-ION-BEGIN-", enable_events=True),
+                            ],
+                            [
+                                Text("End on line:", size=(14, 1)),
+                                Input(key="-ION-END-", enable_events=True),
+                            ],
+                        ], ),
+                    ]],
                 )
             ],
-        ],
-    )
+        ], )
 
     layout = [
         [sg.Menu(menu_def, tearoff=True, pad=(200, 1))],
@@ -225,7 +216,8 @@ def show_main():
 
 
 def on_progress(total, processed):
-    sg.one_line_progress_meter("My 1-line progress meter", processed, total, "single")
+    sg.one_line_progress_meter("My 1-line progress meter", processed, total,
+                               "single")
 
 
 def open_about():

@@ -1,58 +1,14 @@
-import PySimpleGUI as sg
-from PySimpleGUI import (
-    FileBrowse,
-    InputCombo,
-    Combo,
-    Multiline,
-    ML,
-    MLine,
-    Checkbox,
-    CB,
-    Check,
-    Button,
-    B,
-    Btn,
-    ButtonMenu,
-    Canvas,
-    Column,
-    Col,
-    Combo,
-    Frame,
-    Graph,
-    Image,
-    InputText,
-    Input,
-    In,
-    Listbox,
-    LBox,
-    Menu,
-    Multiline,
-    ML,
-    MLine,
-    OptionMenu,
-    Output,
-    Pane,
-    ProgressBar,
-    Radio,
-    Slider,
-    Spin,
-    StatusBar,
-    Tab,
-    TabGroup,
-    Table,
-    Text,
-    Txt,
-    T,
-    Tree,
-    TreeData,
-    VerticalSeparator,
-    Window,
-    Sizer,
-)
-import pandas as pd
-from _version import __version__
-
 import inforion as infor
+import pandas as pd
+import PySimpleGUI as sg
+from _version import __version__
+from PySimpleGUI import (CB, ML, B, Btn, Button, ButtonMenu, Canvas, Check,
+                         Checkbox, Col, Column, Combo, FileBrowse, Frame,
+                         Graph, Image, In, Input, InputCombo, InputText, LBox,
+                         Listbox, Menu, MLine, Multiline, OptionMenu, Output,
+                         Pane, ProgressBar, Radio, Sizer, Slider, Spin,
+                         StatusBar, T, Tab, TabGroup, Table, Text, Tree,
+                         TreeData, Txt, VerticalSeparator, Window)
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)

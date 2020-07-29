@@ -47,11 +47,18 @@ from PySimpleGUI import VerticalSeparator
 from PySimpleGUI import Window
 
 from _version import __version__
+from json import (load as jsonload, dump as jsondump)
+from os import path
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
 sg.set_options(font=appFont)
 sg.theme("Topanga")
+
+
+SETTINGS_FILE = path.join(path.dirname(__file__), r'settings.json')
+DEFAULT_SETTINGS = {'ion_file': None, 'm3_company': 0, 'm3_div': 0}
+SETTINGS_KEYS_TO_ELEMENT_KEYS = {'ion_file': '-ION-FILE-', 'm3_company': '-M3-COMPANY-', 'm3_div': '-M3-DIV-'}
 
 
 def show_main():
@@ -139,6 +146,7 @@ def show_main():
     ]
 
     window = sg.Window("M3 Import Data", layout, margins=(10, 10))
+    settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
 
     # Event Loop
     while True:
@@ -198,19 +206,20 @@ def show_main():
                 )
 
         if event == "Save":
-            sg.popup_ok("Save")
+            save_settings(SETTINGS_FILE, settings, values)
 
         if event == "Load":
-            sg.popup_ok("Load")
-
-        if event == "Exit":
-            window.close()
+            settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
+            fill_form_with_settings(window, settings)
 
         if event == "About":
             open_about()
 
         if event == "Help":
             open_help()
+
+        if event in (sg.WIN_CLOSED, 'Exit'):
+            break
 
     window.close()
 
@@ -232,6 +241,37 @@ def open_about():
 
 def open_help():
     sg.popup_ok("Help")
+
+
+def fill_form_with_settings(window, settings):
+    if settings is None:
+        settings = DEFAULT_SETTINGS
+    for key, value in SETTINGS_KEYS_TO_ELEMENT_KEYS.items():
+        window[value].update(settings[key])
+
+
+def load_settings(settings_file, default_settings):
+    try:
+        with open(settings_file, 'r') as f:
+            settings = jsonload(f)
+    except Exception as e:
+        settings = default_settings
+        save_settings(settings_file, settings, None)
+    return settings
+
+
+def save_settings(settings_file, settings, values):
+    if values:
+        for key in SETTINGS_KEYS_TO_ELEMENT_KEYS:
+            try:
+                settings[key] = values[SETTINGS_KEYS_TO_ELEMENT_KEYS[key]]
+            except Exception as e:
+                print(f'Problem updating settings from window values. Key = {key}')
+
+    with open(settings_file, 'w') as f:
+        jsondump(settings, f)
+
+    sg.popup('Settings saved')
 
 
 show_main()

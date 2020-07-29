@@ -47,7 +47,7 @@ from PySimpleGUI import VerticalSeparator
 from PySimpleGUI import Window
 
 from _version import __version__
-from json import (load as jsonload, dump as jsondump)
+from json import load as jsonload, dump as jsondump
 from os import path
 
 sg.theme("SystemDefault")
@@ -56,10 +56,13 @@ sg.set_options(font=appFont)
 sg.theme("Topanga")
 
 
-SETTINGS_FILE = path.join(path.dirname(__file__), r'settings.json')
-DEFAULT_SETTINGS = {'ion_file': None, 'm3_company': 0, 'm3_div': 0}
+SETTINGS_FILE = path.join(path.dirname(__file__), r"settings.json")
+DEFAULT_SETTINGS = {"ion_file": None, "m3_company": 0, "m3_div": 0}
 SETTINGS_KEYS_TO_ELEMENT_KEYS = {
-    'ion_file': '-ION-FILE-', 'm3_company': '-M3-COMPANY-', 'm3_div': '-M3-DIV-'}
+    "ion_file": "-ION-FILE-",
+    "m3_company": "-M3-COMPANY-",
+    "m3_div": "-M3-DIV-",
+}
 
 
 def show_main():
@@ -70,8 +73,7 @@ def show_main():
     METER_OK = True
     # METER_STOPPED = False
 
-    menu_def = [["File", ["Save", "Load", "Exit"]],
-                ["Help", ["About", "Help"]]]
+    menu_def = [["File", ["Save", "Load", "Exit"]], ["Help", ["About", "Help"]]]
 
     col1 = Column(
         [
@@ -79,66 +81,76 @@ def show_main():
             [
                 Frame(
                     "Logon information",
-                    [[
-                        Text(),
-                        Column([
-                            [
-                                Text("ION File:", size=(14, 1)),
-                                Input(key="-ION-FILE-"),
-                                FileBrowse(file_types=("ION API File",
-                                                       "*.ionapi")),
-                            ],
-                            [
-                                Text("M3 Company/Div:"),
-                                Input(key="-M3-COMPANY-", size=(5, 1)),
-                                Input(key="-M3-DIV-", size=(7, 1)),
-                            ],
-                        ]),
-                    ]],
+                    [
+                        [
+                            Text(),
+                            Column(
+                                [
+                                    [
+                                        Text("ION File:", size=(14, 1)),
+                                        Input(key="-ION-FILE-"),
+                                        FileBrowse(
+                                            file_types=("ION API File", "*.ionapi")
+                                        ),
+                                    ],
+                                    [
+                                        Text("M3 Company/Div:"),
+                                        Input(key="-M3-COMPANY-", size=(5, 1)),
+                                        Input(key="-M3-DIV-", size=(7, 1)),
+                                    ],
+                                ]
+                            ),
+                        ]
+                    ],
                 )
             ],
             # Information frame
             [
                 Frame(
                     "Input Data",
-                    [[
-                        Text(),
-                        Column([
-                            [
-                                Text("URL:", size=(14, 1)),
-                                Input(key="-ION-URL-"),
-                            ],
-                            [
-                                Text("Program:", size=(14, 1)),
-                                Input(key="-ION-Program-"),
-                            ],
-                            [
-                                Text("Method:", size=(14, 1)),
-                                Input(key="-ION-METHOD-"),
-                            ],
-                            [
-                                Text("Input File:", size=(14, 1)),
-                                Input(key="-INPUT-FILE-"),
-                                FileBrowse(),
-                            ],
-                            [
-                                Text("Output File:", size=(14, 1)),
-                                Input(key="-OUTPUT-FILE-"),
-                                FileBrowse(),
-                            ],
-                            [
-                                Text("Begin on line:", size=(14, 1)),
-                                Input(key="-ION-BEGIN-", enable_events=True),
-                            ],
-                            [
-                                Text("End on line:", size=(14, 1)),
-                                Input(key="-ION-END-", enable_events=True),
-                            ],
-                        ], ),
-                    ]],
+                    [
+                        [
+                            Text(),
+                            Column(
+                                [
+                                    [
+                                        Text("URL:", size=(14, 1)),
+                                        Input(key="-ION-URL-"),
+                                    ],
+                                    [
+                                        Text("Program:", size=(14, 1)),
+                                        Input(key="-ION-Program-"),
+                                    ],
+                                    [
+                                        Text("Method:", size=(14, 1)),
+                                        Input(key="-ION-METHOD-"),
+                                    ],
+                                    [
+                                        Text("Input File:", size=(14, 1)),
+                                        Input(key="-INPUT-FILE-"),
+                                        FileBrowse(),
+                                    ],
+                                    [
+                                        Text("Output File:", size=(14, 1)),
+                                        Input(key="-OUTPUT-FILE-"),
+                                        FileBrowse(),
+                                    ],
+                                    [
+                                        Text("Begin on line:", size=(14, 1)),
+                                        Input(key="-ION-BEGIN-", enable_events=True),
+                                    ],
+                                    [
+                                        Text("End on line:", size=(14, 1)),
+                                        Input(key="-ION-END-", enable_events=True),
+                                    ],
+                                ],
+                            ),
+                        ]
+                    ],
                 )
             ],
-        ], )
+        ],
+    )
 
     layout = [
         [sg.Menu(menu_def, tearoff=True, pad=(200, 1))],
@@ -219,15 +231,14 @@ def show_main():
         if event == "Help":
             open_help()
 
-        if event in (sg.WIN_CLOSED, 'Exit'):
+        if event in (sg.WIN_CLOSED, "Exit"):
             break
 
     window.close()
 
 
 def on_progress(total, processed):
-    sg.one_line_progress_meter("My 1-line progress meter", processed, total,
-                               "single")
+    sg.one_line_progress_meter("My 1-line progress meter", processed, total, "single")
 
 
 def open_about():
@@ -253,7 +264,7 @@ def fill_form_with_settings(window, settings):
 
 def load_settings(settings_file, default_settings):
     try:
-        with open(settings_file, 'r') as f:
+        with open(settings_file, "r") as f:
             settings = jsonload(f)
     except Exception as e:
         settings = default_settings
@@ -267,13 +278,12 @@ def save_settings(settings_file, settings, values):
             try:
                 settings[key] = values[SETTINGS_KEYS_TO_ELEMENT_KEYS[key]]
             except Exception as e:
-                print(
-                    f'Problem updating settings from window values. Key = {key}')
+                print(f"Problem updating settings from window values. Key = {key}")
 
-    with open(settings_file, 'w') as f:
+    with open(settings_file, "w") as f:
         jsondump(settings, f)
 
-    sg.popup('Settings saved')
+    sg.popup("Settings saved")
 
 
 show_main()

@@ -5,14 +5,52 @@ from os import path
 import inforion as infor
 import pandas as pd
 import PySimpleGUI as sg
+from PySimpleGUI import B
+from PySimpleGUI import Btn
+from PySimpleGUI import Button
+from PySimpleGUI import ButtonMenu
+from PySimpleGUI import Canvas
+from PySimpleGUI import CB
+from PySimpleGUI import Check
+from PySimpleGUI import Checkbox
+from PySimpleGUI import Col
+from PySimpleGUI import Column
+from PySimpleGUI import Combo
+from PySimpleGUI import FileBrowse
+from PySimpleGUI import Frame
+from PySimpleGUI import Graph
+from PySimpleGUI import Image
+from PySimpleGUI import In
+from PySimpleGUI import Input
+from PySimpleGUI import InputCombo
+from PySimpleGUI import InputText
+from PySimpleGUI import LBox
+from PySimpleGUI import Listbox
+from PySimpleGUI import Menu
+from PySimpleGUI import ML
+from PySimpleGUI import MLine
+from PySimpleGUI import Multiline
+from PySimpleGUI import OptionMenu
+from PySimpleGUI import Output
+from PySimpleGUI import Pane
+from PySimpleGUI import ProgressBar
+from PySimpleGUI import Radio
+from PySimpleGUI import Sizer
+from PySimpleGUI import Slider
+from PySimpleGUI import Spin
+from PySimpleGUI import StatusBar
+from PySimpleGUI import T
+from PySimpleGUI import Tab
+from PySimpleGUI import TabGroup
+from PySimpleGUI import Table
+from PySimpleGUI import Text
+from PySimpleGUI import Tree
+from PySimpleGUI import TreeData
+from PySimpleGUI import Txt
+from PySimpleGUI import VerticalSeparator
+from PySimpleGUI import Window
+
 from _version import __version__
-from PySimpleGUI import (CB, ML, B, Btn, Button, ButtonMenu, Canvas, Check,
-                         Checkbox, Col, Column, Combo, FileBrowse, Frame,
-                         Graph, Image, In, Input, InputCombo, InputText, LBox,
-                         Listbox, Menu, MLine, Multiline, OptionMenu, Output,
-                         Pane, ProgressBar, Radio, Sizer, Slider, Spin,
-                         StatusBar, T, Tab, TabGroup, Table, Text, Tree,
-                         TreeData, Txt, VerticalSeparator, Window)
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)

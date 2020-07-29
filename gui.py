@@ -58,7 +58,8 @@ sg.theme("Topanga")
 
 SETTINGS_FILE = path.join(path.dirname(__file__), r'settings.json')
 DEFAULT_SETTINGS = {'ion_file': None, 'm3_company': 0, 'm3_div': 0}
-SETTINGS_KEYS_TO_ELEMENT_KEYS = {'ion_file': '-ION-FILE-', 'm3_company': '-M3-COMPANY-', 'm3_div': '-M3-DIV-'}
+SETTINGS_KEYS_TO_ELEMENT_KEYS = {
+    'ion_file': '-ION-FILE-', 'm3_company': '-M3-COMPANY-', 'm3_div': '-M3-DIV-'}
 
 
 def show_main():
@@ -266,7 +267,8 @@ def save_settings(settings_file, settings, values):
             try:
                 settings[key] = values[SETTINGS_KEYS_TO_ELEMENT_KEYS[key]]
             except Exception as e:
-                print(f'Problem updating settings from window values. Key = {key}')
+                print(
+                    f'Problem updating settings from window values. Key = {key}')
 
     with open(settings_file, 'w') as f:
         jsondump(settings, f)

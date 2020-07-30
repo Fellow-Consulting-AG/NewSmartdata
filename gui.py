@@ -47,6 +47,7 @@ from PySimpleGUI import VerticalSeparator
 from PySimpleGUI import Window
 
 from _version import __version__
+import validators
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
@@ -158,11 +159,31 @@ def show_main():
         if event == "Execute":
 
             url = values["-ION-URL-"]
+            if validators.url(url) != True:
+                sg.popup_quick_message("You have to provide a valid URL", keep_on_top=True, text_color='red', no_titlebar=True)
+                METER_OK = False
+            
             ionfile = values["-ION-FILE-"]
+            if infor.filehandling.checkfile_exists(ionfile) !=True:
+                sg.popup_quick_message("You have to provide a valid ionfile", keep_on_top=True, text_color='red', no_titlebar=True)
+                METER_OK = False
+                
             program = values["-ION-Program-"]
+            if program.empty():
+                sg.popup_quick_message("You have to provide a program", keep_on_top=True, text_color='red', no_titlebar=True)
+                METER_OK = False
+                
             method = values["-ION-METHOD-"]
+            if method.empty():
+                sg.popup_quick_message("You have to provide atleast one method", keep_on_top=True, text_color='red', no_titlebar=True)
+                METER_OK = False
+                
             inputfile = values["-INPUT-FILE-"]
             outputfile = values["-OUTPUT-FILE-"]
+            if outputfile.empty():
+                sg.popup_quick_message("You have to provide output file path", keep_on_top=True, text_color='red', no_titlebar=True)
+                METER_OK = False
+                
             if values["-ION-BEGIN-"]:
                 start = int(values["-ION-BEGIN-"])
             else:

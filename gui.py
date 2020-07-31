@@ -38,10 +38,21 @@ def show_main():
     METER_OK = True
     # METER_STOPPED = False
 
-    menu_def = [["File", ["Save", "Load", "Exit"]],
-                ["Commands", ["Extract", "Load", "Merge", "Catalog", [
-                    "Get", "List", "Purge", "Upload"], "Transform"]],
-                ["Help", ["About", "Help"]]]
+    menu_def = [
+        ["File", ["Save", "Load", "Exit"]],
+        [
+            "Commands",
+            [
+                "Extract",
+                "Load",
+                "Merge",
+                "Catalog",
+                ["Get", "List", "Purge", "Upload"],
+                "Transform",
+            ],
+        ],
+        ["Help", ["About", "Help"]],
+    ]
 
     col1 = Column(
         [
@@ -49,66 +60,76 @@ def show_main():
             [
                 Frame(
                     "Logon information",
-                    [[
-                        Text(),
-                        Column([
-                            [
-                                Text("ION File:", size=(14, 1)),
-                                Input(key="-ION-FILE-"),
-                                FileBrowse(file_types=("ION API File",
-                                                       "*.ionapi")),
-                            ],
-                            [
-                                Text("M3 Company/Div:"),
-                                Input(key="-M3-COMPANY-", size=(5, 1)),
-                                Input(key="-M3-DIV-", size=(7, 1)),
-                            ],
-                        ]),
-                    ]],
+                    [
+                        [
+                            Text(),
+                            Column(
+                                [
+                                    [
+                                        Text("ION File:", size=(14, 1)),
+                                        Input(key="-ION-FILE-"),
+                                        FileBrowse(
+                                            file_types=("ION API File", "*.ionapi")
+                                        ),
+                                    ],
+                                    [
+                                        Text("M3 Company/Div:"),
+                                        Input(key="-M3-COMPANY-", size=(5, 1)),
+                                        Input(key="-M3-DIV-", size=(7, 1)),
+                                    ],
+                                ]
+                            ),
+                        ]
+                    ],
                 )
             ],
             # Information frame
             [
                 Frame(
                     "Input Data",
-                    [[
-                        Text(),
-                        Column([
-                            [
-                                Text("URL:", size=(14, 1)),
-                                Input(key="-ION-URL-"),
-                            ],
-                            [
-                                Text("Program:", size=(14, 1)),
-                                Input(key="-ION-Program-"),
-                            ],
-                            [
-                                Text("Method:", size=(14, 1)),
-                                Input(key="-ION-METHOD-"),
-                            ],
-                            [
-                                Text("Input File:", size=(14, 1)),
-                                Input(key="-INPUT-FILE-"),
-                                FileBrowse(),
-                            ],
-                            [
-                                Text("Output File:", size=(14, 1)),
-                                Input(key="-OUTPUT-FILE-"),
-                                FileBrowse(),
-                            ],
-                            [
-                                Text("Begin on line:", size=(14, 1)),
-                                Input(key="-ION-BEGIN-", enable_events=True),
-                            ],
-                            [
-                                Text("End on line:", size=(14, 1)),
-                                Input(key="-ION-END-", enable_events=True),
-                            ],
-                        ], ),
-                    ]],
+                    [
+                        [
+                            Text(),
+                            Column(
+                                [
+                                    [
+                                        Text("URL:", size=(14, 1)),
+                                        Input(key="-ION-URL-"),
+                                    ],
+                                    [
+                                        Text("Program:", size=(14, 1)),
+                                        Input(key="-ION-Program-"),
+                                    ],
+                                    [
+                                        Text("Method:", size=(14, 1)),
+                                        Input(key="-ION-METHOD-"),
+                                    ],
+                                    [
+                                        Text("Input File:", size=(14, 1)),
+                                        Input(key="-INPUT-FILE-"),
+                                        FileBrowse(),
+                                    ],
+                                    [
+                                        Text("Output File:", size=(14, 1)),
+                                        Input(key="-OUTPUT-FILE-"),
+                                        FileBrowse(),
+                                    ],
+                                    [
+                                        Text("Begin on line:", size=(14, 1)),
+                                        Input(key="-ION-BEGIN-", enable_events=True),
+                                    ],
+                                    [
+                                        Text("End on line:", size=(14, 1)),
+                                        Input(key="-ION-END-", enable_events=True),
+                                    ],
+                                ],
+                            ),
+                        ]
+                    ],
                 )
             ],
-        ], )
+        ],
+    )
 
     layout = [
         [sg.Menu(menu_def, tearoff=True, pad=(200, 1))],
@@ -141,32 +162,52 @@ def show_main():
             url = values["-ION-URL-"]
             if validators.url(url) != True:
                 sg.popup_quick_message(
-                    "You have to provide a valid URL", keep_on_top=True, text_color='red', no_titlebar=True)
+                    "You have to provide a valid URL",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
                 METER_OK = False
 
             ionfile = values["-ION-FILE-"]
             if infor.filehandling.checkfile_exists(ionfile) != True:
-                sg.popup_quick_message("You have to provide a valid ionfile",
-                                       keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message(
+                    "You have to provide a valid ionfile",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
                 METER_OK = False
 
             program = values["-ION-Program-"]
             if program.empty():
                 sg.popup_quick_message(
-                    "You have to provide a program", keep_on_top=True, text_color='red', no_titlebar=True)
+                    "You have to provide a program",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
                 METER_OK = False
 
             method = values["-ION-METHOD-"]
             if method.empty():
-                sg.popup_quick_message("You have to provide atleast one method",
-                                       keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message(
+                    "You have to provide atleast one method",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
                 METER_OK = False
 
             inputfile = values["-INPUT-FILE-"]
             outputfile = values["-OUTPUT-FILE-"]
             if outputfile.empty():
-                sg.popup_quick_message("You have to provide output file path",
-                                       keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message(
+                    "You have to provide output file path",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
                 METER_OK = False
 
             if values["-ION-BEGIN-"]:
@@ -224,50 +265,60 @@ def show_main():
         if event == "Extract" and not window_extract_active:
             window_extract_active = True
             window.Hide()
-            programs = ['AAS320MI', 'CRS610MI', 'MMS301MI']
+            programs = ["AAS320MI", "CRS610MI", "MMS301MI"]
 
-            def TextLabel(text): return sg.Text(
-                text + ':', justification='r', size=(15, 1))
+            def TextLabel(text):
+                return sg.Text(text + ":", justification="r", size=(15, 1))
 
             column = Column(
                 [
                     [
                         Frame(
                             "Input Data",
-                            [[
-                                Text(),
-                                Column([
-                                    [
-                                        TextLabel('Program'),
-                                        sg.Combo(programs, size=(10, 10), key='-PROGRAM-')],
-                                    [
-                                        TextLabel("Output File"),
-                                        Input(key="-OUTPUT-FILE-"),
-                                        FileBrowse(),
-                                    ]
-                                ], ),
-                            ]],
+                            [
+                                [
+                                    Text(),
+                                    Column(
+                                        [
+                                            [
+                                                TextLabel("Program"),
+                                                sg.Combo(
+                                                    programs,
+                                                    size=(10, 10),
+                                                    key="-PROGRAM-",
+                                                ),
+                                            ],
+                                            [
+                                                TextLabel("Output File"),
+                                                Input(key="-OUTPUT-FILE-"),
+                                                FileBrowse(),
+                                            ],
+                                        ],
+                                    ),
+                                ]
+                            ],
                         )
                     ],
-                ], )
+                ],
+            )
 
             layout_extract = [[column], [Button("Execute"), Button("Cancel")]]
             window_extract = sg.Window(
-                'New Smartdata  - Extract', layout_extract, margins=(10, 10))
+                "New Smartdata  - Extract", layout_extract, margins=(10, 10)
+            )
 
             while True:
                 event, values = window_extract.read()
 
-                if event == sg.WIN_CLOSED or event == 'Cancel':
+                if event == sg.WIN_CLOSED or event == "Cancel":
                     window_extract.Close()
                     window_extract_active = False
                     break
 
-                if event == 'Execute':
+                if event == "Execute":
                     program = values["-PROGRAM-"]
                     output_file = values["-OUTPUT-FILE-"]
-                    excelexport.generate_api_template_file(
-                        program, output_file)
+                    excelexport.generate_api_template_file(program, output_file)
                     sg.popup("Template generated!")
 
         window.UnHide()
@@ -276,8 +327,7 @@ def show_main():
 
 
 def on_progress(total, processed):
-    sg.one_line_progress_meter("My 1-line progress meter", processed, total,
-                               "single")
+    sg.one_line_progress_meter("My 1-line progress meter", processed, total, "single")
 
 
 def open_about():
@@ -317,9 +367,7 @@ def save_settings(settings_file, settings, values):
             try:
                 settings[key] = values[SETTINGS_KEYS_TO_ELEMENT_KEYS[key]]
             except Exception as e:
-                print(
-                    f"Problem updating settings from window values. Key = {key}"
-                )
+                print(f"Problem updating settings from window values. Key = {key}")
 
     with open(settings_file, "w") as f:
         jsondump(settings, f)

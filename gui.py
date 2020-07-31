@@ -2,56 +2,19 @@ from json import dump as jsondump
 from json import load as jsonload
 from os import path
 
-import inforion as infor
-import pandas as pd
 import PySimpleGUI as sg
-from PySimpleGUI import B
-from PySimpleGUI import Btn
+import inforion as infor
+from inforion import excelexport
+import pandas as pd
+import validators
 from PySimpleGUI import Button
-from PySimpleGUI import ButtonMenu
-from PySimpleGUI import Canvas
-from PySimpleGUI import CB
-from PySimpleGUI import Check
-from PySimpleGUI import Checkbox
-from PySimpleGUI import Col
 from PySimpleGUI import Column
-from PySimpleGUI import Combo
 from PySimpleGUI import FileBrowse
 from PySimpleGUI import Frame
-from PySimpleGUI import Graph
-from PySimpleGUI import Image
-from PySimpleGUI import In
 from PySimpleGUI import Input
-from PySimpleGUI import InputCombo
-from PySimpleGUI import InputText
-from PySimpleGUI import LBox
-from PySimpleGUI import Listbox
-from PySimpleGUI import Menu
-from PySimpleGUI import ML
-from PySimpleGUI import MLine
-from PySimpleGUI import Multiline
-from PySimpleGUI import OptionMenu
-from PySimpleGUI import Output
-from PySimpleGUI import Pane
-from PySimpleGUI import ProgressBar
-from PySimpleGUI import Radio
-from PySimpleGUI import Sizer
-from PySimpleGUI import Slider
-from PySimpleGUI import Spin
-from PySimpleGUI import StatusBar
-from PySimpleGUI import T
-from PySimpleGUI import Tab
-from PySimpleGUI import TabGroup
-from PySimpleGUI import Table
 from PySimpleGUI import Text
-from PySimpleGUI import Tree
-from PySimpleGUI import TreeData
-from PySimpleGUI import Txt
-from PySimpleGUI import VerticalSeparator
-from PySimpleGUI import Window
 
 from _version import __version__
-import validators
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
@@ -76,6 +39,7 @@ def show_main():
     # METER_STOPPED = False
 
     menu_def = [["File", ["Save", "Load", "Exit"]],
+                ["Commands", ["Extract", "Load", "Merge", "Catalog", ["Get", "List", "Purge", "Upload"], "Transform"]],
                 ["Help", ["About", "Help"]]]
 
     col1 = Column(
@@ -151,8 +115,10 @@ def show_main():
         [Button("Execute"), Button("Cancel")],
     ]
 
-    window = sg.Window("M3 Import Data", layout, margins=(10, 10))
+    window = sg.Window("New Smartdata - Main", layout, margins=(10, 10))
     settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
+
+    window_extract_active = False
 
     # Event Loop
     while True:
@@ -246,6 +212,56 @@ def show_main():
 
         if event in (sg.WIN_CLOSED, "Exit"):
             break
+
+        # Command Windows
+
+        if event == "Extract" and not window_extract_active:
+            window_extract_active = True
+            window.Hide()
+            programs = ['AAS320MI', 'CRS610MI', 'MMS301MI']
+
+            def TextLabel(text): return sg.Text(text + ':', justification='r', size=(15, 1))
+
+            column = Column(
+                [
+                    [
+                        Frame(
+                            "Input Data",
+                            [[
+                                Text(),
+                                Column([
+                                    [
+                                        TextLabel('Program'),
+                                        sg.Combo(programs, size=(10, 10), key='-PROGRAM-')],
+                                    [
+                                        TextLabel("Output File"),
+                                        Input(key="-OUTPUT-FILE-"),
+                                        FileBrowse(),
+                                    ]
+                                ], ),
+                            ]],
+                        )
+                    ],
+                ], )
+
+            layout_extract = [[column], [Button("Execute"), Button("Cancel")]]
+            window_extract = sg.Window('New Smartdata  - Extract', layout_extract, margins=(10, 10))
+
+            while True:
+                event, values = window_extract.read()
+
+                if event == sg.WIN_CLOSED or event == 'Cancel':
+                    window_extract.Close()
+                    window_extract_active = False
+                    break
+
+                if event == 'Execute':
+                    program = values["-PROGRAM-"]
+                    output_file = values["-OUTPUT-FILE-"]
+                    excelexport.generate_api_template_file(program, output_file)
+                    sg.popup("Template generated!")
+
+        window.UnHide()
 
     window.close()
 

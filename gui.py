@@ -39,7 +39,8 @@ def show_main():
     # METER_STOPPED = False
 
     menu_def = [["File", ["Save", "Load", "Exit"]],
-                ["Commands", ["Extract", "Load", "Merge", "Catalog", ["Get", "List", "Purge", "Upload"], "Transform"]],
+                ["Commands", ["Extract", "Load", "Merge", "Catalog", [
+                    "Get", "List", "Purge", "Upload"], "Transform"]],
                 ["Help", ["About", "Help"]]]
 
     col1 = Column(
@@ -139,30 +140,35 @@ def show_main():
 
             url = values["-ION-URL-"]
             if validators.url(url) != True:
-                sg.popup_quick_message("You have to provide a valid URL", keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message(
+                    "You have to provide a valid URL", keep_on_top=True, text_color='red', no_titlebar=True)
                 METER_OK = False
-            
+
             ionfile = values["-ION-FILE-"]
-            if infor.filehandling.checkfile_exists(ionfile) !=True:
-                sg.popup_quick_message("You have to provide a valid ionfile", keep_on_top=True, text_color='red', no_titlebar=True)
+            if infor.filehandling.checkfile_exists(ionfile) != True:
+                sg.popup_quick_message("You have to provide a valid ionfile",
+                                       keep_on_top=True, text_color='red', no_titlebar=True)
                 METER_OK = False
-                
+
             program = values["-ION-Program-"]
             if program.empty():
-                sg.popup_quick_message("You have to provide a program", keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message(
+                    "You have to provide a program", keep_on_top=True, text_color='red', no_titlebar=True)
                 METER_OK = False
-                
+
             method = values["-ION-METHOD-"]
             if method.empty():
-                sg.popup_quick_message("You have to provide atleast one method", keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message("You have to provide atleast one method",
+                                       keep_on_top=True, text_color='red', no_titlebar=True)
                 METER_OK = False
-                
+
             inputfile = values["-INPUT-FILE-"]
             outputfile = values["-OUTPUT-FILE-"]
             if outputfile.empty():
-                sg.popup_quick_message("You have to provide output file path", keep_on_top=True, text_color='red', no_titlebar=True)
+                sg.popup_quick_message("You have to provide output file path",
+                                       keep_on_top=True, text_color='red', no_titlebar=True)
                 METER_OK = False
-                
+
             if values["-ION-BEGIN-"]:
                 start = int(values["-ION-BEGIN-"])
             else:
@@ -220,7 +226,8 @@ def show_main():
             window.Hide()
             programs = ['AAS320MI', 'CRS610MI', 'MMS301MI']
 
-            def TextLabel(text): return sg.Text(text + ':', justification='r', size=(15, 1))
+            def TextLabel(text): return sg.Text(
+                text + ':', justification='r', size=(15, 1))
 
             column = Column(
                 [
@@ -245,7 +252,8 @@ def show_main():
                 ], )
 
             layout_extract = [[column], [Button("Execute"), Button("Cancel")]]
-            window_extract = sg.Window('New Smartdata  - Extract', layout_extract, margins=(10, 10))
+            window_extract = sg.Window(
+                'New Smartdata  - Extract', layout_extract, margins=(10, 10))
 
             while True:
                 event, values = window_extract.read()
@@ -258,7 +266,8 @@ def show_main():
                 if event == 'Execute':
                     program = values["-PROGRAM-"]
                     output_file = values["-OUTPUT-FILE-"]
-                    excelexport.generate_api_template_file(program, output_file)
+                    excelexport.generate_api_template_file(
+                        program, output_file)
                     sg.popup("Template generated!")
 
         window.UnHide()

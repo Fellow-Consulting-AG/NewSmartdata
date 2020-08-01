@@ -304,8 +304,8 @@ def show_main():
                     program = values["-PROGRAM-"]
                     output_file = values["-OUTPUT-FILE-"]
 
-                    if not isinstance(validators.length(program, 8), ValidationFailure) \
-                            and not isinstance(validators.length(output_file, 1), ValidationFailure):
+                    if validators.length(program, 8) \
+                            and validators.length(output_file, 1):
                         excelexport.generate_api_template_file(
                             program, output_file)
                         sg.popup("Template generated!")

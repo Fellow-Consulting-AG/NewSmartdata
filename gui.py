@@ -13,6 +13,7 @@ from PySimpleGUI import FileBrowse
 from PySimpleGUI import Frame
 from PySimpleGUI import Input
 from PySimpleGUI import Text
+from validators import ValidationFailure
 
 from _version import __version__
 
@@ -302,9 +303,14 @@ def show_main():
                 if event == "Execute":
                     program = values["-PROGRAM-"]
                     output_file = values["-OUTPUT-FILE-"]
-                    excelexport.generate_api_template_file(
-                        program, output_file)
-                    sg.popup("Template generated!")
+
+                    if not isinstance(validators.length(program, 8), ValidationFailure) \
+                            and not isinstance(validators.length(output_file, 1), ValidationFailure):
+                        excelexport.generate_api_template_file(
+                            program, output_file)
+                        sg.popup("Template generated!")
+                    else:
+                        sg.popup_ok("Please, check the form values!")
 
         window.UnHide()
 

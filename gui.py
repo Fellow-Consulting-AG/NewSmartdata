@@ -1,6 +1,7 @@
 from json import dump as jsondump
 from json import load as jsonload
 from os import path
+from programs import programs
 
 import PySimpleGUI as sg
 import inforion as infor
@@ -255,7 +256,6 @@ def show_main():
         if event == "Extract" and not window_extract_active:
             window_extract_active = True
             window.Hide()
-            programs = ["AAS320MI", "CRS610MI", "MMS301MI"]
 
             def TextLabel(text):
                 return sg.Text(text + ":", justification="r", size=(15, 1))

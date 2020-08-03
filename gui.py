@@ -1,7 +1,6 @@
 from json import dump as jsondump
 from json import load as jsonload
 from os import path
-from programs import programs
 
 import inforion as infor
 import pandas as pd
@@ -16,6 +15,7 @@ from PySimpleGUI import Input
 from PySimpleGUI import Text
 
 from _version import __version__
+from programs import programs
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)

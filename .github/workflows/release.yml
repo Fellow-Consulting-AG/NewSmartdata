@@ -32,7 +32,15 @@ jobs:
     - name: Build App
       run: |
         python setup.py py2app
-        ls dist/NewSmartdata.app
+    - uses: actions/upload-artifact@v2
+      with:
+        name: NewSmartdata.app
+        path: /Users/runner/work/NewSmartdata/NewSmartdata/dist/NewSmartdata.app
+    - name: Download the artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: NewSmartdata.app
+        path: ./
     - name: Get release
       id: get_release
       uses: bruceadams/get-release@v1.2.0
@@ -45,6 +53,26 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: NewSmartdata.app
+        asset_path: ./NewSmartdata.app
         asset_name: NewSmartdata.app
         asset_content_type: application/octet-stream
+
+
+
+
+
+    - name: Download the artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: my-artifact
+        path: ./
+
+    - name: Upload the release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifact.tar.gz
+        asset_name: artifact.tar.gz
+        asset_content_type: application/gzip

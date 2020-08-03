@@ -3,17 +3,17 @@ from json import load as jsonload
 from os import path
 from programs import programs
 
-import PySimpleGUI as sg
 import inforion as infor
 import pandas as pd
+import PySimpleGUI as sg
 import validators
+from inforion import excelexport
 from PySimpleGUI import Button
 from PySimpleGUI import Column
 from PySimpleGUI import FileBrowse
 from PySimpleGUI import Frame
 from PySimpleGUI import Input
 from PySimpleGUI import Text
-from inforion import excelexport
 
 from _version import __version__
 

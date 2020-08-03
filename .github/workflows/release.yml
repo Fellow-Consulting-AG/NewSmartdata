@@ -32,7 +32,8 @@ jobs:
     - name: Build App
       run: |
         python setup.py py2app
-        ls dist
+        cp dist/NewSmartdata.app .
+        ls
     - name: Get release
       id: get_release
       uses: bruceadams/get-release@v1.2.0
@@ -45,6 +46,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: dist/NewSmartdata.app
+        asset_path: NewSmartdata.app
         asset_name: NewSmartdata.app
         asset_content_type: application/octet-stream

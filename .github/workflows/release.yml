@@ -32,7 +32,8 @@ jobs:
     - name: Build App
       run: |
         python setup.py py2app
-        ls  ./NewSmartdata/dist
+        pwd
+        ls
     - name: Get release
       id: get_release
       uses: bruceadams/get-release@v1.2.0

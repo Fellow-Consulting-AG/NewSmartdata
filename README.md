@@ -4,7 +4,7 @@ NewSmartdata
 
 The **NewSmartdata Tool** is a Python3 app and its purpose is to efficiently execute the Data Loading, from external systems to the *M3 Cloud platform*. It all happens via **Infor ION** (Intelligent Open Network), which simplifies software integration and easily integrates entreprise systems. 
 
-This software installation will simply provide an intuitive Data Loading Workspace, where the **Extract, Transfer and Load (ETL)** can be performed. In order to get started with the **NewSmartdata Tool**, you have to check the system requirements and then install it.
+This software installation will simply provide an intuitive Data Loading Workspace, where the **Extract, Transfer and Load (ETL)** can be performed. In order to get started with the **NewSmartdata Tool**, just install it.
 
 
 ----------------

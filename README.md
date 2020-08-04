@@ -1,5 +1,5 @@
 --------------
-NewSmartdata
+New Smartdata
 --------------
 
 New Smartdata Tool for Loading Data from external systems to M3 over Infor ION.

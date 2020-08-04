@@ -32,6 +32,7 @@ jobs:
     - name: Build App
       run: |
         python setup.py py2app
+        zip -r NewSmartdata.app.zip dist/NewSmartdata.app
     - uses: actions/upload-artifact@v2
       with:
         name: NewSmartdata.app
@@ -53,6 +54,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: ./NewSmartdata.app
+        asset_path: ./NewSmartdata.app.zip
         asset_name: NewSmartdata.app
         asset_content_type: application/octet-stream

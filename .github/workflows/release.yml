@@ -46,5 +46,5 @@ jobs:
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
         asset_path: ./NewSmartdata.app.zip
-        asset_name: NewSmartdata.app
+        asset_name: NewSmartdata.app.zip
         asset_content_type: application/octet-stream

@@ -6,7 +6,7 @@ The **NewSmartdata Tool** is a Python3 app and its purpose is to efficiently exe
 
 This software installation will simply provide an intuitive Data Loading Workspace, where the **Extract, Transfer and Load (ETL)** can be performed. In order to get started with the **NewSmartdata Tool**, just install it.
 
-.. image:: New Smartdata.png
+.. image:: New_Smartdata.jpg
 
 ----------------
 Current Status

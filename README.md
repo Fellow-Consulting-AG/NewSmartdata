@@ -2,7 +2,7 @@
 New Smartdata
 --------------
 
-The New Smartdata Tool is a Python3 app. It is responsible for the Data Loading from external systems to M3 via Infor ION.
+The **New Smartdata Tool** is a Python3 app and its purpose is to efficiently execute the Data Loading, from external systems to the *M3 Cloud platform*. It all happens via **Infor ION** (Intelligent Open Network), which simplifies software integration and easily integrates entreprise systems. 
 
 ----------------
 Current Status

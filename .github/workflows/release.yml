@@ -33,16 +33,7 @@ jobs:
       run: |
         python setup.py py2app
         zip -r NewSmartdata.app.zip dist/NewSmartdata.app
-    - uses: actions/upload-artifact@v2
-      with:
-        name: NewSmartdata.app
-        path: /Users/runner/work/NewSmartdata/NewSmartdata/dist/NewSmartdata.app
-    - name: Download the artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: NewSmartdata.app
-        path: ./
-    - name: Get release
+    - name: Get Release
       id: get_release
       uses: bruceadams/get-release@v1.2.0
       env:

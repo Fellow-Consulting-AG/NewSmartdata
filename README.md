@@ -2,7 +2,7 @@
 NewSmartdata
 --------------
 
-New Smartdata Tool for Loading Data to M3 over Infor ION.
+New Smartdata Tool for Loading Data from external systems to M3 over Infor ION.
 
 ----------------
 Current Status

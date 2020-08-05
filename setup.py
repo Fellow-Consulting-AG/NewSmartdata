@@ -4,11 +4,8 @@ APP = ["gui.py"]
 DATA_FILES = []
 OPTIONS = {
     "argv_emulation": True,
-    'iconfile': 'iconfinder.icns',
-    "plist": {
-        "CFBundleShortVersionString": "0.2.0",
-        "LSUIElement": True,
-    },
+    "iconfile": "iconfinder.icns",
+    "plist": {"CFBundleShortVersionString": "0.2.0", "LSUIElement": True,},
     "packages": ["PySimpleGUI", "inforion", "pandas"],
 }
 setup(

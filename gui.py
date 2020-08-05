@@ -5,12 +5,18 @@ from os import path
 import inforion as infor
 import pandas as pd
 import PySimpleGUI as sg
-# import PySimpleGUIWx as sg
 import validators
-from _version import __version__
 from inforion import excelexport
+from PySimpleGUI import Button
+from PySimpleGUI import Column
+from PySimpleGUI import FileBrowse
+from PySimpleGUI import Frame
+from PySimpleGUI import Input
+from PySimpleGUI import Text
+
+from _version import __version__
 from programs import programs
-from PySimpleGUI import Button, Column, FileBrowse, Frame, Input, Text
+# import PySimpleGUIWx as sg
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)

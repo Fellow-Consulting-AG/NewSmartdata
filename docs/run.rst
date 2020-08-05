@@ -8,17 +8,17 @@ After installing the **New Smartdata Tool App** a new window will appear, as sho
     :align: center
 MacOs
 
-.. image:: source/images/New_Smartdata.jpg
+.. image:: source/images/Windows_Smartdata.jpg
     :align: center
 Windows
 
-Nevertheless, there are various commands available at the upper screen of your MacOs (as shown below), where you can *extract, load or merge* data files.
+Nevertheless, there are various commands available at the upper screen of your MacOs (as shown below) or at the upper part of the app window (Windows), where you can *extract, load or merge* data files.
 
 .. image:: source/images/Commands_NewSmartdata.jpg
     :align: center
 MacOs
 
-.. image:: source/images/Commands_NewSmartdata.jpg
+.. image:: source/images/Windows_Commands.jpg
     :align: center
 Windows
 
@@ -28,6 +28,6 @@ As an example we can extract data by just choosing the program type and browsing
     :align: center
 MacOs
 
-.. image:: source/images/Extract_NewSmartdata.jpg
+.. image:: source/images/Windows_Extract.jpg
     :align: center
 Windows

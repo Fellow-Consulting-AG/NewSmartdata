@@ -13,6 +13,6 @@ In a few moments the New Smartdata App window should appear to get things starte
     :align: center
 MacOs
 
-.. image:: source/images/New_Smartdata.jpg
+.. image:: source/images/Windows_Smartdata.jpg
     :align: center
 Windows

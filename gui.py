@@ -22,7 +22,7 @@ sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
 sg.set_options(font=appFont)
 sg.theme("LightGreen")
-sg.ChangeLookAndFeel('LightGreen') 
+sg.ChangeLookAndFeel('LightGreen')
 
 SETTINGS_FILE = path.join(path.dirname(__file__), r"settings.json")
 DEFAULT_SETTINGS = {"ion_file": None, "m3_company": 0, "m3_div": 0}

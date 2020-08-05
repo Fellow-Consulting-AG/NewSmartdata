@@ -1,4 +1,5 @@
-After installing the zip folder with the New Smartdata app, you need to open your terminal (MacOS) or Command Prompt (Windows) to follow this simple instruptions for unzipping the folder:
+When talking about a MacOS, the right way of installing the **New Smartdata App** is by downloading the zip folder. After downloading it, you need to open your terminal (MacOS) to follow these simple instruptions for unzipping the folder.
+One step at a time, you should:
 ::
 
     cd Downloads/
@@ -12,6 +13,8 @@ In a few moments the New Smartdata App window should appear to get things starte
 .. image:: source/images/New_Smartdata.jpg
     :align: center
 MacOs
+
+Now, for Windows computers it is much easier. Just by allowing the download to proceed with the NewSmartdata.exe, you should see the window of the app open.
 
 .. image:: source/images/Windows_Smartdata.jpg
     :align: center

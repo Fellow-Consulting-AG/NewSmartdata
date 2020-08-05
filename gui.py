@@ -280,7 +280,6 @@ def show_main():
                                 [
                                     TextLabel("Output File"),
                                     Input(key="-OUTPUT-FILE-"),
-                                    FileBrowse(),
                                 ],
                             ], ),
                         ]],

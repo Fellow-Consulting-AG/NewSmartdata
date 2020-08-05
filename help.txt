@@ -1,0 +1,45 @@
+
+brew info tcl-tk
+pyenv uninstall 3.8.2
+
+export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"
+export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"
+export PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig"
+
+env PYTHON_CONFIGURE_OPTS="--enable-framework"  pyenv install -v 3.8.2
+env CFLAGS="-I$(brew --prefix tcl-tk)/include" 
+pyenv install -v 3.8.2
+
+ ln -s /Users/daniel/.pyenv/versions/3.8.2/Python.framework/Versions/3.8/lib/libpython3.8.dylib /Users/daniel/.pyenv/versions/3.8.2/lib/libpython3.8.dylib
+
+python3 setup.py py2app       
+
+
+
+install pyenv via homebrew
+$brew install pyenv
+
+install tcl-tk via home brew
+$brew install tcl-tk
+
+to get tcl-tk 8.6 to work with the pyenv install of python, you must
+edit the python-build script file. It may be located in one these two locations:
+
+~/.pyenv/plugins/python-build/bin/python-build
+env 
+
+
+env PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/include' --with-tcltk-libs='-L/usr/local/opt/tcl-tk/lib -ltcl8.6 -ltk8.6' --enable-framework" pyenv install 3.8.0
+
+
+
+pyenv uninstall 3.8.2
+ env \
+  PATH="$(brew --prefix tcl-tk)/bin:$PATH" \
+  LDFLAGS="-L$(brew --prefix tcl-tk)/lib" \
+  CPPFLAGS="-I$(brew --prefix tcl-tk)/include" \
+  PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig" \
+  CFLAGS="-I$(brew --prefix tcl-tk)/include" \
+  PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I$(brew --prefix tcl-tk)/include' --with-tcltk-libs='-L$(brew --prefix tcl-tk)/lib -ltcl8.6 -ltk8.6' --enable-framework" \
+  pyenv install 3.8.2

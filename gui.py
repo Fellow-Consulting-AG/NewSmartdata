@@ -5,7 +5,6 @@ from os import path
 import inforion as infor
 import pandas as pd
 import PySimpleGUI as sg
-#import PySimpleGUIWx as sg
 import validators
 from inforion import excelexport
 from PySimpleGUI import Button
@@ -18,11 +17,13 @@ from PySimpleGUI import Text
 from _version import __version__
 from programs import programs
 
+# import PySimpleGUIWx as sg
+
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
 sg.set_options(font=appFont)
 sg.theme("LightGreen")
-sg.ChangeLookAndFeel('LightGreen') 
+sg.ChangeLookAndFeel("LightGreen")
 
 SETTINGS_FILE = path.join(path.dirname(__file__), r"settings.json")
 DEFAULT_SETTINGS = {"ion_file": None, "m3_company": 0, "m3_div": 0}
@@ -280,7 +281,6 @@ def show_main():
                                 [
                                     TextLabel("Output File"),
                                     Input(key="-OUTPUT-FILE-"),
-                                    FileBrowse(),
                                 ],
                             ], ),
                         ]],

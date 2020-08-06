@@ -1,4 +1,8 @@
-When talking about a MacOS, the right way of installing the **New Smartdata App** is by downloading the zip folder. After downloading it, you need to open your terminal (MacOS) to follow these simple instruptions for unzipping the folder.
+--------------------------
+How to install for MacOS
+--------------------------
+
+When talking about a MacOS, the right way of installing the **New Smartdata App** is by downloading the zip folder. After downloading it, you need to open your terminal (MacOS) to follow these simple instruptions for *unzipping the folder*.
 One step at a time, you should:
 ::
 
@@ -14,7 +18,11 @@ In a few moments the New Smartdata App window should appear to get things starte
     :align: center
 MacOs
 
-Now, for Windows computers it is much easier. Just by allowing the download to proceed with the NewSmartdata.exe, you should see the window of the app open.
+----------------------------
+How to install for Windows
+----------------------------
+
+Now, for Windows computers it is much easier. Just by allowing the download to proceed with the **NewSmartdata.exe**, you should see the window of the app open.
 
 .. image:: source/images/Windows_Smartdata.jpg
     :align: center

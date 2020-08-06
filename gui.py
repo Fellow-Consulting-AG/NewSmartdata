@@ -338,13 +338,17 @@ def open_help():
     try:
         docs = "https://new-smartdata-tool-fur-infor.readthedocs.io/"
         command = None
-        if sys.platform.startswith('linux'):
+        if sys.platform.startswith("linux"):
             command = "/usr/bin/google-chrome-stable {}".format(docs)
-        elif sys.platform.startswith('darwin'):
-            command = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome {}".format(docs)
-        elif sys.platform.startswith('win'):
+        elif sys.platform.startswith("darwin"):
+            command = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome {}".format(
+                docs)
+        elif sys.platform.startswith("win"):
             command = "start chrome {}".format(docs)
-        subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.Popen(command,
+                         shell=True,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
     except Exception as e:
         sg.popup("Cannot open browser.")
 

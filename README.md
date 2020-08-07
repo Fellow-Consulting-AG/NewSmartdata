@@ -1,5 +1,4 @@
 ---
-
 ## SmartData
 
 The **SmartData Tool** is a Python3 app and its purpose is to efficiently
@@ -9,14 +8,13 @@ software integration and easily integrates entreprise systems.
 
 This software installation will simply provide an intuitive Data Loading
 Workspace, where the **Extract, Transfer and Load (ETL)** can be performed. In
-order to get started with the **SmartData Tool**, just install it.
-<<<<<<< HEAD
+order to get started with the **SmartData Tool**, just install it. <<<<<<< HEAD
 =======
-
 ---
 
 ## Current Status
->>>>>>> Restyle Change name to Smartdata (#48)
+
+> > > > > > > Restyle Change name to Smartdata (#48)
 
 ![SmartData version](https://img.shields.io/badge/version-0.0.2-blue)
 [![Documentation Status](https://readthedocs.org/projects/inforion/badge/?version=latest)](https://inforion.readthedocs.io/de/latest/?badge=latest)

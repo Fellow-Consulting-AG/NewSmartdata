@@ -28,7 +28,7 @@ jobs:
     - name: Build App
       run: |
         python setup.py py2app
-        zip -r NewSmartdata.app.zip dist/NewSmartdata.app
+        zip -r NewSmartdata.app.zip dist/SmartData.app
     - name: Get Release
       id: get_release
       uses: bruceadams/get-release@v1.2.0

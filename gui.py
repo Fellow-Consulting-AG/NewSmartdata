@@ -1,3 +1,5 @@
+import subprocess
+import sys
 from json import dump as jsondump
 from json import load as jsonload
 from os import path
@@ -35,7 +37,6 @@ SETTINGS_KEYS_TO_ELEMENT_KEYS = {
 
 
 def show_main():
-
     METER_REASON_CANCELLED = "cancelled"
     # METER_REASON_CLOSED = "closed"
     # METER_REASON_REACHED_MAX = "finished"
@@ -334,7 +335,22 @@ def open_about():
 
 
 def open_help():
-    sg.popup_ok("Help")
+    try:
+        docs = "https://new-smartdata-tool-fur-infor.readthedocs.io/"
+        command = None
+        if sys.platform.startswith("linux"):
+            command = "/usr/bin/google-chrome-stable {}".format(docs)
+        elif sys.platform.startswith("darwin"):
+            command = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome {}".format(
+                docs)
+        elif sys.platform.startswith("win"):
+            command = "start chrome {}".format(docs)
+        subprocess.Popen(command,
+                         shell=True,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    except Exception as e:
+        sg.popup("Cannot open browser.")
 
 
 def fill_form_with_settings(window, settings):

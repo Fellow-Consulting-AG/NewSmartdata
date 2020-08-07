@@ -1,17 +1,17 @@
-New Smartdata docs
+SmartData docs
 ===================
 
-Smartdata is a Python 3 app.
+SmartData is a Python 3 app.
 
 .. toctree::
    :caption: Usage
    :maxdepth: 2
-   
+
    install
    run
-   
 
-   
+
+
 
 Indices and tables
 ==================

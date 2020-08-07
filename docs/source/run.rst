@@ -2,7 +2,7 @@
 SmartData App
 ------------------
 
-After installing the **SmartData Tool App** a new window will appear, as shown below. The main purpose is to be able to execute commands according to the desired Logon information and Input Data. In the Logon Information it is essential that you specify which M3 company and division you are working on.
+After installing the **SmartData Tool App** a new window will appear, as shown below. The main purpose is to be able to execute commands according to the desired Logon information and Input Data. In the Logon Information it is essential that you specify which M3 company and division you are working on. 
 
 .. image:: source/images/New_Smartdata.jpg
     :align: center

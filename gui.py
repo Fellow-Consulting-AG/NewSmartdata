@@ -240,7 +240,7 @@ def show_main():
                 )
 
         if event == "Save":
-            save_settings(SETTINGS_FILE, settings, values)
+            save_settings(True, SETTINGS_FILE, settings, values)
 
         if event == "Load":
             settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
@@ -366,11 +366,11 @@ def load_settings(settings_file, default_settings):
             settings = jsonload(f)
     except Exception as e:
         settings = default_settings
-        save_settings(settings_file, settings, None)
+        save_settings(False, settings_file, settings, None)
     return settings
 
 
-def save_settings(settings_file, settings, values):
+def save_settings(notify, settings_file, settings, values):
     if values:
         for key in SETTINGS_KEYS_TO_ELEMENT_KEYS:
             try:
@@ -383,7 +383,8 @@ def save_settings(settings_file, settings, values):
     with open(settings_file, "w") as f:
         jsondump(settings, f)
 
-    sg.popup("Settings saved")
+    if notify:
+        sg.popup("Settings saved")
 
 
 show_main()

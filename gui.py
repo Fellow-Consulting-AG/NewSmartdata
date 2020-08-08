@@ -20,7 +20,6 @@ from PySimpleGUI import Text
 from _version import __version__
 from programs import programs
 
-
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
 sg.set_options(font=appFont)
@@ -277,12 +276,14 @@ def show_main():
                                         programs,
                                         size=(10, 5),
                                         key="-PROGRAM-",
-                                        select_mode="extended"
+                                        select_mode="extended",
                                     ),
                                 ],
-
-                                [TextLabel('Output Folder'), sg.Input(key='-OUTPUT-FOLDER-'),
-                                 sg.FolderBrowse(target='-OUTPUT-FOLDER-')],
+                                [
+                                    TextLabel("Output Folder"),
+                                    sg.Input(key="-OUTPUT-FOLDER-"),
+                                    sg.FolderBrowse(target="-OUTPUT-FOLDER-"),
+                                ],
                             ], ),
                         ]],
                     )
@@ -306,10 +307,12 @@ def show_main():
                     programs_list = values["-PROGRAM-"]
                     output_folder = values["-OUTPUT-FOLDER-"]
 
-                    if validators.length(programs, 1) and validators.length(output_folder, 1):
+                    if validators.length(programs, 1) and validators.length(
+                            output_folder, 1):
                         for program in programs_list:
                             output_path = output_folder + os.sep + program
-                            excelexport.generate_api_template_file(program, output_path)
+                            excelexport.generate_api_template_file(
+                                program, output_path)
                         sg.popup("Template(s) generated!")
                     else:
                         sg.popup_ok("Please, check the form values!")

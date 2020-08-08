@@ -309,7 +309,8 @@ def show_main():
                     if validators.length(programs, 1) and validators.length(output_folder, 1):
                         for program in programs_list:
                             output_path = output_folder + os.sep + program
-                            excelexport.generate_api_template_file(program, output_path)
+                            excelexport.generate_api_template_file(
+                                program, output_path)
                         sg.popup("Template(s) generated!")
                     else:
                         sg.popup_ok("Please, check the form values!")

@@ -272,7 +272,11 @@ def show_main():
                             Column([
                                 [
                                     TextLabel("Program"),
-                                    sg.Input(size=(10, 1), enable_events=True, key='-FILTER-')
+                                    sg.Input(
+                                        size=(10, 1),
+                                        enable_events=True,
+                                        key="-FILTER-",
+                                    ),
                                 ],
                                 [
                                     Text(justification="r", size=(12, 1)),
@@ -308,19 +312,20 @@ def show_main():
                     window_extract_active = False
                     break
 
-                if values['-FILTER-'] != '':
-                    search = values['-FILTER-']
+                if values["-FILTER-"] != "":
+                    search = values["-FILTER-"]
                     filtered_programs = [x for x in programs if search in x]
-                    window_extract['-PROGRAM-'].update(filtered_programs)
+                    window_extract["-PROGRAM-"].update(filtered_programs)
                 else:
-                    window_extract['-PROGRAM-'].update(programs)
+                    window_extract["-PROGRAM-"].update(programs)
 
                 if event == "Execute":
                     programs_list = values["-PROGRAM-"]
                     output_folder = values["-OUTPUT-FOLDER-"]
 
-                    if validators.length(programs_list, 1) and validators.length(
-                            output_folder, 1):
+                    if validators.length(programs_list,
+                                         1) and validators.length(
+                                             output_folder, 1):
                         for program in programs_list:
                             output_path = output_folder + os.sep + program
                             excelexport.generate_api_template_file(

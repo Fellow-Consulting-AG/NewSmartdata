@@ -5,8 +5,7 @@ DATA_FILES = []
 OPTIONS = {
     "argv_emulation": True,
     "iconfile": "iconfinder.icns",
-    "plist": {
-    },
+    "plist": {},
     "packages": ["PySimpleGUI", "inforion", "pandas"],
 }
 setup(

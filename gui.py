@@ -272,7 +272,8 @@ def show_main():
                             Column([
                                 [
                                     TextLabel("Program"),
-                                    sg.Input(size=(10, 1), enable_events=True, key='-FILTER-')
+                                    sg.Input(
+                                        size=(10, 1), enable_events=True, key='-FILTER-')
                                 ],
                                 [
                                     Text(justification="r", size=(12, 1)),

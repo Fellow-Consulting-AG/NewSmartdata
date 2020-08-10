@@ -14,7 +14,7 @@ One step at a time, you should:
 If you followed the steps correctly, you should get an output to wait while downloading.
 In a few moments the SmartData App window should appear to get things started.
 
-.. image:: source/images/New_Smartdata.jpg
+.. image:: images/New_Smartdata.jpg
     :align: center
 MacOs
 
@@ -24,6 +24,6 @@ How to install for Windows
 
 Now, for Windows computers it is much easier. Just by allowing the download to proceed with the **NewSmartdata.exe**, you should see the window of the app open.
 
-.. image:: source/images/Windows_Smartdata.jpg
+.. image:: images/Windows_Smartdata.jpg
     :align: center
 Windows

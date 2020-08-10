@@ -6,8 +6,7 @@ OPTIONS = {
     "argv_emulation": True,
     "site_packages": True,
     "iconfile": "iconfinder.icns",
-    "plist": {
-    },
+    "plist": {},
     "packages": ["PySimpleGUI", "inforion", "pandas"],
 }
 setup(

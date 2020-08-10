@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 from json import dump as jsondump
@@ -18,8 +19,6 @@ from PySimpleGUI import Text
 
 from _version import __version__
 from programs import programs
-
-# import PySimpleGUIWx as sg
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
@@ -262,7 +261,7 @@ def show_main():
             window.Hide()
 
             def TextLabel(text):
-                return sg.Text(text + ":", justification="r", size=(15, 1))
+                return sg.Text(text + ":", justification="r", size=(12, 1))
 
             column = Column([
                 [
@@ -273,15 +272,26 @@ def show_main():
                             Column([
                                 [
                                     TextLabel("Program"),
-                                    sg.Combo(
-                                        programs,
-                                        size=(10, 10),
-                                        key="-PROGRAM-",
+                                    sg.Input(
+                                        size=(10, 1),
+                                        enable_events=True,
+                                        key="-FILTER-",
                                     ),
                                 ],
                                 [
-                                    TextLabel("Output File"),
-                                    Input(key="-OUTPUT-FILE-"),
+                                    Text(justification="r", size=(12, 1)),
+                                    sg.Listbox(
+                                        programs,
+                                        size=(10, 5),
+                                        enable_events=False,
+                                        key="-PROGRAM-",
+                                        select_mode="multiple",
+                                    ),
+                                ],
+                                [
+                                    TextLabel("Output Folder"),
+                                    sg.Input(key="-OUTPUT-FOLDER-"),
+                                    sg.FolderBrowse(target="-OUTPUT-FOLDER-"),
                                 ],
                             ], ),
                         ]],
@@ -302,15 +312,25 @@ def show_main():
                     window_extract_active = False
                     break
 
-                if event == "Execute":
-                    program = values["-PROGRAM-"]
-                    output_file = values["-OUTPUT-FILE-"]
+                if values["-FILTER-"] != "":
+                    search = values["-FILTER-"]
+                    filtered_programs = [x for x in programs if search in x]
+                    window_extract["-PROGRAM-"].update(filtered_programs)
+                else:
+                    window_extract["-PROGRAM-"].update(programs)
 
-                    if validators.length(program, 8) and validators.length(
-                            output_file, 1):
-                        excelexport.generate_api_template_file(
-                            program, output_file)
-                        sg.popup("Template generated!")
+                if event == "Execute":
+                    programs_list = values["-PROGRAM-"]
+                    output_folder = values["-OUTPUT-FOLDER-"]
+
+                    if validators.length(programs_list,
+                                         1) and validators.length(
+                                             output_folder, 1):
+                        for program in programs_list:
+                            output_path = output_folder + os.sep + program
+                            excelexport.generate_api_template_file(
+                                program, output_path)
+                        sg.popup("Template(s) generated!")
                     else:
                         sg.popup_ok("Please, check the form values!")
 

@@ -4,7 +4,7 @@ APP = ["gui.py"]
 DATA_FILES = []
 OPTIONS = {
     "argv_emulation": True,
-    "site-packages": True,
+    "site_packages": True,
     "iconfile": "iconfinder.icns",
     "plist": {
     },

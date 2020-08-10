@@ -3,7 +3,7 @@ from setuptools import setup
 APP = ["gui.py"]
 DATA_FILES = []
 OPTIONS = {
-    "argv_emulation": True,
+    "argv_emulation": False,
     "iconfile": "iconfinder.icns",
     "plist": {},
     "packages": ["PySimpleGUI", "inforion", "pandas"],

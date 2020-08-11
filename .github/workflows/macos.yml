@@ -39,5 +39,5 @@ jobs:
         ls dist/
     - uses: actions/upload-artifact@v2
       with:
-        name: NewSmartdata.app
-        path: /Users/runner/work/NewSmartdata/NewSmartdata/dist/
+        name: Smartdata
+        path: /Users/runner/work/NewSmartdata/NewSmartdata/dist/Smartdata

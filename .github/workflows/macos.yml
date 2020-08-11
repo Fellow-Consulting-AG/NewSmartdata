@@ -35,7 +35,7 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller --clean --windowed -F gui.py --icon=iconfinder.icns --name Smartdata
+        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name Smartdata
         ls dist/
     - uses: actions/upload-artifact@v2
       with:

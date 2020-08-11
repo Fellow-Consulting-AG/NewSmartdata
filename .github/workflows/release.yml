@@ -28,7 +28,7 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller --clean --windowed -F gui.py --icon=iconfinder.icns --name Smartdata
+        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name Smartdata
         ls dist/
         zip -r Smartdata.zip dist/SmartData
     - name: Get Release
@@ -71,7 +71,7 @@ jobs:
 #        pytest
     - name: Build Exe
       run: |
-        pyinstaller --clean --win-private-assemblies -F gui.py --name Smartdata
+        pyinstaller --clean --noconsole --win-private-assemblies -F gui.py --name Smartdata
     - name: Get Release
       id: get_release
       uses: bruceadams/get-release@v1.2.0

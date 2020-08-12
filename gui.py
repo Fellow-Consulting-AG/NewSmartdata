@@ -27,7 +27,17 @@ sg.theme("LightGreen")
 sg.ChangeLookAndFeel("LightGreen")
 
 SETTINGS_FILE = path.join(path.dirname(__file__), r"settings.json")
-DEFAULT_SETTINGS = {"ion_file": None, "m3_company": 0, "m3_div": '', "url":'', "method":'', "input_file":'', "output_file":'', "start":0, "end":None}
+DEFAULT_SETTINGS = {
+    "ion_file": None,
+    "m3_company": 0,
+    "m3_div": "",
+    "url": "",
+    "method": "",
+    "input_file": "",
+    "output_file": "",
+    "start": 0,
+    "end": None,
+}
 SETTINGS_KEYS_TO_ELEMENT_KEYS = {
     "ion_file": "-ION-FILE-",
     "m3_company": "-M3-COMPANY-",
@@ -186,7 +196,7 @@ def show_main():
             method = values["-ION-METHOD-"]
             inputfile = values["-INPUT-FILE-"]
             outputfile = values["-OUTPUT-FILE-"]
-            
+
             if values["-ION-BEGIN-"]:
                 start = int(values["-ION-BEGIN-"])
             else:
@@ -196,7 +206,7 @@ def show_main():
                 end = int(values["-ION-END-"])
             else:
                 end = None
-            
+
             if validators.url(url) != True:
                 sg.popup_quick_message(
                     "You have to provide a valid URL",
@@ -255,11 +265,11 @@ def show_main():
                 METER_OK = False
             else:
                 METER_OK = True
-                dataframe = pd.read_excel(inputfile, dtype=str)                
+                dataframe = pd.read_excel(inputfile, dtype=str)
                 program = programs_list[0]
-            
+
             if METER_OK:
-                
+
                 infor.main_load(
                     url,
                     ionfile,

@@ -27,11 +27,17 @@ sg.theme("LightGreen")
 sg.ChangeLookAndFeel("LightGreen")
 
 SETTINGS_FILE = path.join(path.dirname(__file__), r"settings.json")
-DEFAULT_SETTINGS = {"ion_file": None, "m3_company": 0, "m3_div": 0}
+DEFAULT_SETTINGS = {"ion_file": None, "m3_company": 0, "m3_div": '', "url":'', "method":'', "input_file":'', "output_file":'', "start":0, "end":None}
 SETTINGS_KEYS_TO_ELEMENT_KEYS = {
     "ion_file": "-ION-FILE-",
     "m3_company": "-M3-COMPANY-",
     "m3_div": "-M3-DIV-",
+    "url": "-ION-URL-",
+    "method": "-ION-METHOD-",
+    "input_file": "-INPUT-FILE-",
+    "output_file": "-OUTPUT-FILE-",
+    "start": "-ION-BEGIN-",
+    "end": "-ION-END-",
 }
 
 
@@ -95,7 +101,21 @@ def show_main():
                             ],
                             [
                                 Text("Program:", size=(14, 1)),
-                                Input(key="-ION-Program-"),
+                                sg.Input(
+                                    size=(10, 1),
+                                    enable_events=True,
+                                    key="-ION-FILTER-",
+                                ),
+                            ],
+                            [
+                                Text(justification="r", size=(14, 1)),
+                                sg.Listbox(
+                                    programs,
+                                    size=(10, 5),
+                                    enable_events=False,
+                                    key="-ION-Program-",
+                                    select_mode="single",
+                                ),
                             ],
                             [
                                 Text("Method:", size=(14, 1)),
@@ -151,59 +171,22 @@ def show_main():
                     no_titlebar=True,
                 )
 
+        if values["-ION-FILTER-"] != "":
+            search = values["-ION-FILTER-"]
+            filtered_programs = [x for x in programs if search in x]
+            window["-ION-Program-"].update(filtered_programs)
+        else:
+            window["-ION-Program-"].update(programs)
+
         if event == "Execute":
 
             url = values["-ION-URL-"]
-            if validators.url(url) != True:
-                sg.popup_quick_message(
-                    "You have to provide a valid URL",
-                    keep_on_top=True,
-                    text_color="red",
-                    no_titlebar=True,
-                )
-                METER_OK = False
-
             ionfile = values["-ION-FILE-"]
-            if infor.filehandling.checkfile_exists(ionfile) != True:
-                sg.popup_quick_message(
-                    "You have to provide a valid ionfile",
-                    keep_on_top=True,
-                    text_color="red",
-                    no_titlebar=True,
-                )
-                METER_OK = False
-
-            program = values["-ION-Program-"]
-            if program.empty():
-                sg.popup_quick_message(
-                    "You have to provide a program",
-                    keep_on_top=True,
-                    text_color="red",
-                    no_titlebar=True,
-                )
-                METER_OK = False
-
+            programs_list = values["-ION-Program-"]
             method = values["-ION-METHOD-"]
-            if method.empty():
-                sg.popup_quick_message(
-                    "You have to provide atleast one method",
-                    keep_on_top=True,
-                    text_color="red",
-                    no_titlebar=True,
-                )
-                METER_OK = False
-
             inputfile = values["-INPUT-FILE-"]
             outputfile = values["-OUTPUT-FILE-"]
-            if outputfile.empty():
-                sg.popup_quick_message(
-                    "You have to provide output file path",
-                    keep_on_top=True,
-                    text_color="red",
-                    no_titlebar=True,
-                )
-                METER_OK = False
-
+            
             if values["-ION-BEGIN-"]:
                 start = int(values["-ION-BEGIN-"])
             else:
@@ -213,10 +196,48 @@ def show_main():
                 end = int(values["-ION-END-"])
             else:
                 end = None
-
-            if infor.filehandling.checkfile_exists(inputfile):
-                dataframe = pd.read_excel(inputfile, dtype=str)
-            else:
+            
+            if validators.url(url) != True:
+                sg.popup_quick_message(
+                    "You have to provide a valid URL",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
+                METER_OK = False
+            elif infor.filehandling.checkfile_exists(ionfile) != True:
+                sg.popup_quick_message(
+                    "You have to provide a valid ionfile",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
+                METER_OK = False
+            elif not programs_list:
+                sg.popup_quick_message(
+                    "You have to provide a program",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
+                METER_OK = False
+            elif not method:
+                sg.popup_quick_message(
+                    "You have to provide atleast one method",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
+                METER_OK = False
+            elif not outputfile:
+                sg.popup_quick_message(
+                    "You have to provide output file path",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
+                METER_OK = False
+            elif not infor.filehandling.checkfile_exists(inputfile):
                 sg.popup_quick_message(
                     "Input File not found",
                     keep_on_top=True,
@@ -224,8 +245,21 @@ def show_main():
                     no_titlebar=True,
                 )
                 METER_OK = False
-
+            elif end is not None and end < start:
+                sg.popup_quick_message(
+                    "Begin value must be greater then End value",
+                    keep_on_top=True,
+                    text_color="red",
+                    no_titlebar=True,
+                )
+                METER_OK = False
+            else:
+                METER_OK = True
+                dataframe = pd.read_excel(inputfile, dtype=str)                
+                program = programs_list[0]
+            
             if METER_OK:
+                
                 infor.main_load(
                     url,
                     ionfile,

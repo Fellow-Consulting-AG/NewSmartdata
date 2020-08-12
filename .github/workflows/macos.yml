@@ -35,7 +35,7 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name QuickdataLoad
+        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name QuickdataLoad --add-binary "Mapping_Template.xlsx:inforion/excelexport/" --add-binary "iconfinder.icns:."
         ls dist/
     - uses: actions/upload-artifact@v2
       with:

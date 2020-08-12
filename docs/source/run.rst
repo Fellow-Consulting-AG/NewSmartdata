@@ -14,7 +14,7 @@ Windows
 
 Nevertheless, there are various commands available at the upper screen of your MacOs (as shown below) or at the upper part of the app window (Windows), where you can *extract, load or merge* data files.
 
-.. image:: images/Commands_NewQuickdataLoad.jpg
+.. image:: images/Commands_QuickdataLoad.jpg
     :align: center
 MacOs
 
@@ -24,7 +24,7 @@ Windows
 
 As an example we can extract data by just choosing the program type and browsing into your computer to allocate the desired output file. That means, the main process of retrieving data out of the program source to an output file will be executed.
 
-.. image:: images/Extract_NewQuickdataLoad.jpg
+.. image:: images/Extract_QuickdataLoad.jpg
     :align: center
 MacOs
 

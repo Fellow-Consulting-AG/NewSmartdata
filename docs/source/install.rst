@@ -7,9 +7,9 @@ One step at a time, you should:
 ::
 
     cd Downloads/
-    unzip NewQuickdataLoad.app.zip
-    cd dist/NewQuickdataLoad.app/Contents/MacOS
-    ./NewQuickdataLoad
+    unzip QuickdataLoad.app.zip
+    cd dist/QuickdataLoad.app/Contents/MacOS
+    ./QuickdataLoad
 
 If you followed the steps correctly, you should get an output to wait while downloading.
 In a few moments the QuickdataLoad App window should appear to get things started.
@@ -22,7 +22,7 @@ MacOs
 How to install for Windows
 ----------------------------
 
-Now, for Windows computers it is much easier. Just by allowing the download to proceed with the **NewQuickdataLoad.exe**, you should see the window of the app open.
+Now, for Windows computers it is much easier. Just by allowing the download to proceed with the **QuickdataLoad.exe**, you should see the window of the app open.
 
 .. image:: images/Windows_QuickdataLoad.jpg
     :align: center

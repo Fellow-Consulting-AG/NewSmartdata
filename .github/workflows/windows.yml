@@ -35,8 +35,8 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller --clean --win-private-assemblies -F gui.py --name Smartdata
+        pyinstaller --clean --win-private-assemblies -F gui.py --name QuickdataLoad
     - uses: actions/upload-artifact@v2
       with:
-        name: Smartdata.exe
-        path: dist/Smartdata.exe
+        name: QuickdataLoad.exe
+        path: dist/QuickdataLoad.exe

@@ -35,9 +35,9 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name Smartdata
+        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name QuickdataLoad
         ls dist/
     - uses: actions/upload-artifact@v2
       with:
-        name: Smartdata
-        path: /Users/runner/work/NewSmartdata/NewSmartdata/dist/Smartdata
+        name: QuickdataLoad
+        path: /Users/runner/work/NewQuickdataLoad/NewQuickdataLoad/dist/QuickdataLoad

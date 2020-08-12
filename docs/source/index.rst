@@ -1,7 +1,7 @@
-SmartData docs
+QuickdataLoad docs
 ===================
 
-SmartData is a Python 3 app.
+QuickdataLoad is a Python 3 app.
 
 .. toctree::
    :caption: Usage

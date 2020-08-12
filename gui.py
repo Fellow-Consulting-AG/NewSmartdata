@@ -131,7 +131,7 @@ def show_main():
         [Button("Execute"), Button("Cancel")],
     ]
 
-    window = sg.Window("SmartData - Main", layout, margins=(10, 10))
+    window = sg.Window("QuickdataLoad - Main", layout, margins=(10, 10))
     settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
 
     window_extract_active = False
@@ -300,7 +300,7 @@ def show_main():
             ], )
 
             layout_extract = [[column], [Button("Execute"), Button("Cancel")]]
-            window_extract = sg.Window("SmartData  - Extract",
+            window_extract = sg.Window("QuickdataLoad  - Extract",
                                        layout_extract,
                                        margins=(10, 10))
 
@@ -351,12 +351,12 @@ def open_about():
     Tel: +49 (0)8121 792980
     Email: sales@fellow-consulting.de
     """
-    sg.popup_ok("SmartData, Version: {}".format(__version__), about_text)
+    sg.popup_ok("QuickdataLoad, Version: {}".format(__version__), about_text)
 
 
 def open_help():
     try:
-        docs = "https://new-smartdata-tool-fur-infor.readthedocs.io/"
+        docs = "https://new-QuickdataLoad-tool-fur-infor.readthedocs.io/"
         command = None
         if sys.platform.startswith("linux"):
             command = "/usr/bin/google-chrome-stable {}".format(docs)

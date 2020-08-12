@@ -10,7 +10,7 @@ from setuptools import setup
 # }
 # setup(
 #     app=APP,
-#     name="SmartData",
+#     name="QuickdataLoad",
 #     data_files=DATA_FILES,
 #     options={"py2app": OPTIONS},
 #     setup_requires=["py2app"],

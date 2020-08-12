@@ -28,9 +28,9 @@ jobs:
 #        pytest
     - name: Build App
       run: |
-        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name Smartdata
+        pyinstaller --clean --noconsole --onefile --windowed -F gui.py --icon=iconfinder.icns --name QuickdataLoad
         ls dist/
-        zip -r Smartdata.zip dist/SmartData
+        zip -r QuickdataLoad.zip dist/QuickdataLoad
     - name: Get Release
       id: get_release
       uses: bruceadams/get-release@v1.2.0
@@ -43,8 +43,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: ./Smartdata.zip
-        asset_name: Smartdata.zip
+        asset_path: ./QuickdataLoad.zip
+        asset_name: QuickdataLoad.zip
         asset_content_type: application/zip
 
   build-windows:
@@ -71,7 +71,7 @@ jobs:
 #        pytest
     - name: Build Exe
       run: |
-        pyinstaller --clean --noconsole --win-private-assemblies -F gui.py --name Smartdata
+        pyinstaller --clean --noconsole --win-private-assemblies -F gui.py --name QuickdataLoad
     - name: Get Release
       id: get_release
       uses: bruceadams/get-release@v1.2.0
@@ -84,6 +84,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
-        asset_path: ./dist/Smartdata.exe
-        asset_name: Smartdata.exe
+        asset_path: ./dist/QuickdataLoad.exe
+        asset_name: QuickdataLoad.exe
         asset_content_type: application/octet-stream

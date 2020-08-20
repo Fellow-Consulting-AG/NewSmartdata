@@ -26,7 +26,12 @@ sg.set_options(font=appFont)
 sg.theme("LightGreen")
 sg.ChangeLookAndFeel("LightGreen")
 
-SETTINGS_FILE = path.join(path.dirname(__file__), r"settings.json")
+SETTINGS_FILE = path.join(path.dirname(__file__), "SETTINGS_FILE")
+
+if getattr(sys, '_MEIPASS', False):
+    bundle_dir = getattr(sys, '_MEIPASS')
+    SETTINGS_FILE = os.path.abspath(os.path.join(bundle_dir, "settings.json"))
+
 DEFAULT_SETTINGS = {
     "ion_file": None,
     "m3_company": 0,

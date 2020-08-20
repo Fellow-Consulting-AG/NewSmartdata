@@ -26,11 +26,11 @@ sg.set_options(font=appFont)
 sg.theme("LightGreen")
 sg.ChangeLookAndFeel("LightGreen")
 
-SETTINGS_FILE = path.join(path.dirname(__file__), "SETTINGS_FILE")
-
-if getattr(sys, '_MEIPASS', False):
-    bundle_dir = getattr(sys, '_MEIPASS')
-    SETTINGS_FILE = os.path.abspath(os.path.join(bundle_dir, "settings.json"))
+# SETTINGS_FILE = path.join(path.dirname(__file__), "SETTINGS_FILE")
+#
+# if getattr(sys, '_MEIPASS', False):
+#     bundle_dir = getattr(sys, '_MEIPASS')
+#     SETTINGS_FILE = os.path.abspath(os.path.join(bundle_dir, "settings.json"))
 
 DEFAULT_SETTINGS = {
     "ion_file": None,
@@ -64,7 +64,8 @@ def show_main():
     # METER_STOPPED = False
 
     menu_def = [
-        ["File", ["Save", "Load", "Exit"]],
+        # ["File", ["Save", "Load", "Exit"]],
+        ["File", ["Exit"]],
         [
             "Commands",
             [
@@ -167,7 +168,7 @@ def show_main():
     ]
 
     window = sg.Window("QuickdataLoad - Main", layout, margins=(10, 10))
-    settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
+    # settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
 
     window_extract_active = False
 
@@ -287,12 +288,12 @@ def show_main():
                     on_progress,
                 )
 
-        if event == "Save":
-            save_settings(True, SETTINGS_FILE, settings, values)
-
-        if event == "Load":
-            settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
-            fill_form_with_settings(window, settings)
+        # if event == "Save":
+        #     save_settings(True, SETTINGS_FILE, settings, values)
+        #
+        # if event == "Load":
+        #     settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
+        #     fill_form_with_settings(window, settings)
 
         if event == "About":
             open_about()

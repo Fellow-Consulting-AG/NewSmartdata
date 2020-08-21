@@ -46,7 +46,7 @@ jobs:
 
     - uses: dlemstra/code-sign-action@v1
       with:
-        certificate: '${{ steps.write_file.outputs.filePath }}\FellowConsultingCert.p12'
+        certificate: '${{ steps.get_cert.outputs.filePath }}\FellowConsultingCert.p12'
         folder: 'dist'
         recursive: true
 

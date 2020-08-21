@@ -291,7 +291,7 @@ def show_main():
 
         if event == "Save":
             save_settings(True, SETTINGS_FILE, settings, values)
-        
+
         if event == "Load":
             settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
             fill_form_with_settings(window, settings)
@@ -388,7 +388,7 @@ def show_main():
                     except Exception as e:
                         infor.logger.exception(e)
                         sg.popup_ok("Something went wrong! Please check the error logs!")
-                        
+
 
         window.UnHide()
 

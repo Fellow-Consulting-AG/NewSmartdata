@@ -5,6 +5,11 @@ from json import dump as jsondump
 from json import load as jsonload
 from os import path
 
+dir =  '/tmp/QuickLoad'
+if not os.path.exists(dir):
+    os.makedirs(dir)
+os.chdir(dir) # just for safety
+
 import inforion as infor
 import pandas as pd
 import PySimpleGUI as sg
@@ -26,11 +31,7 @@ sg.set_options(font=appFont)
 sg.theme("LightGreen")
 sg.ChangeLookAndFeel("LightGreen")
 
-# SETTINGS_FILE = path.join(path.dirname(__file__), "SETTINGS_FILE")
-#
-# if getattr(sys, '_MEIPASS', False):
-#     bundle_dir = getattr(sys, '_MEIPASS')
-#     SETTINGS_FILE = os.path.abspath(os.path.join(bundle_dir, "settings.json"))
+SETTINGS_FILE = os.path.join(dir, 'settings.json')
 
 DEFAULT_SETTINGS = {
     "ion_file": None,
@@ -168,7 +169,7 @@ def show_main():
     ]
 
     window = sg.Window("QuickdataLoad - Main", layout, margins=(10, 10))
-    # settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
+    settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
 
     window_extract_active = False
 
@@ -288,12 +289,12 @@ def show_main():
                     on_progress,
                 )
 
-        # if event == "Save":
-        #     save_settings(True, SETTINGS_FILE, settings, values)
-        #
-        # if event == "Load":
-        #     settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
-        #     fill_form_with_settings(window, settings)
+        if event == "Save":
+            save_settings(True, SETTINGS_FILE, settings, values)
+
+        if event == "Load":
+            settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
+            fill_form_with_settings(window, settings)
 
         if event == "About":
             open_about()
@@ -370,19 +371,24 @@ def show_main():
                     window_extract["-PROGRAM-"].update(programs)
 
                 if event == "Execute":
-                    programs_list = values["-PROGRAM-"]
-                    output_folder = values["-OUTPUT-FOLDER-"]
+                    try:
+                        programs_list = values["-PROGRAM-"]
+                        output_folder = values["-OUTPUT-FOLDER-"]
 
-                    if validators.length(programs_list,
-                                         1) and validators.length(
-                                             output_folder, 1):
-                        for program in programs_list:
-                            output_path = output_folder + os.sep + program
-                            excelexport.generate_api_template_file(
-                                program, output_path)
-                        sg.popup("Template(s) generated!")
-                    else:
-                        sg.popup_ok("Please, check the form values!")
+                        if validators.length(programs_list,
+                                            1) and validators.length(
+                                                output_folder, 1):
+                            for program in programs_list:
+                                output_path = output_folder + os.sep + program
+                                excelexport.generate_api_template_file(
+                                    program, output_path)
+                            sg.popup("Template(s) generated!")
+                        else:
+                            sg.popup_ok("Please, check the form values!")
+                    except Exception as e:
+                        infor.logger.exception(e)
+                        sg.popup_ok("Something went wrong! Please check the error logs!")
+
 
         window.UnHide()
 

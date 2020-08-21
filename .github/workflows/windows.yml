@@ -44,9 +44,10 @@ jobs:
         fileName: 'FellowConsultingCert.p12'
         encodedString: ${{ secrets.CERT_FILE }}
 
-    - name: Sign app
+    - name: Sign App
       run: |
-        dir ${{ steps.write_file.outputs.filePath }}
+        setx /M PATH "%PATH%;C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/"
+        dir ${{ steps.get_cert.outputs.filePath }}
         signtool sign /debug /t http://timestamp.verisign.com/scripts/timstamp.dll /f ${{ steps.write_file.outputs.filePath }}\FellowConsultingCert.p12 /p ${{ secrets.CERT_PASSWORD }} dist\QuickdataLoad.exe
 
     - uses: actions/upload-artifact@v2

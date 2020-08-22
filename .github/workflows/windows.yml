@@ -44,17 +44,10 @@ jobs:
         fileName: 'FellowConsultingCert.p12'
         encodedString: ${{ secrets.CERT_FILE }}
 
-    - uses: dlemstra/code-sign-action@v1
-      with:
-        certificate: '${{ steps.get_cert.outputs.filePath }}\FellowConsultingCert.p12'
-        folder: 'dist'
-        recursive: true
-
-#    - name: Sign App
-#      run: |
-#        setx /M PATH "%PATH%;C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/"
-#        dir ${{ steps.get_cert.outputs.filePath }}
-#        signtool sign /debug /t http://timestamp.verisign.com/scripts/timstamp.dll /f ${{ steps.write_file.outputs.filePath }}\FellowConsultingCert.p12 /p ${{ secrets.CERT_PASSWORD }} dist\QuickdataLoad.exe
+    - name: Sign App
+      run: |
+        $signtool="C:\Program Files `(x86`)\Windows Kits\10\App Certification Kit\signtool.exe"
+        & $signtool sign /debug /t http://timestamp.verisign.com/scripts/timstamp.dll /f ${{ steps.get_cert.outputs.filePath }}\FellowConsultingCert.p12 /p ${{ secrets.CERT_PASSWORD }} dist\QuickdataLoad.exe
 
     - uses: actions/upload-artifact@v2
       with:

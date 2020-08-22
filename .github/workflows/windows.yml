@@ -48,7 +48,7 @@ jobs:
       run: |
         cp ${{ steps.get_cert.outputs.filePath }} dist
         $signtool="C:\Program Files `(x86`)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe"
-        & $signtool sign /debug /t http://timestamp.verisign.com/scripts/timstamp.dll /f dist\FellowConsultingCert.p12  /p ${{ secrets.CERT_PASSWORD }} dist\QuickdataLoad.exe
+        & $signtool sign /t http://timestamp.verisign.com/scripts/timstamp.dll /f dist\FellowConsultingCert.p12  /p ${{ secrets.CERT_PASSWORD }} dist\QuickdataLoad.exe
 
     - uses: actions/upload-artifact@v2
       with:

@@ -41,14 +41,14 @@ jobs:
       id: get_cert
       uses: timheuer/base64-to-file@v1.0.3
       with:
-        fileName: 'FellowConsultingCert.p12'
+        fileName: 'FellowConsultingCert.pfx'
         encodedString: ${{ secrets.CERT_FILE }}
 
     - name: Sign App
       run: |
         cp ${{ steps.get_cert.outputs.filePath }} dist
         $signtool="C:\Program Files `(x86`)\Windows Kits\10\App Certification Kit\signtool.exe"
-        & $signtool sign /a /tr http://timestamp.geotrust.com/tsa /td sha1 /fd sha1 /v /f dist\FellowConsultingCert.p12 /p ${{ secrets.CERT_PASSWORD }} /v dist\QuickdataLoad.exe
+        & $signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /v /f dist\FellowConsultingCert.pfx /v dist\QuickdataLoad.exe
 
     - uses: actions/upload-artifact@v2
       with:

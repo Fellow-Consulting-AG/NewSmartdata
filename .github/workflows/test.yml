@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - fix-build
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+    - name: ls
+      run: |
+        pwd
+        ls /
+    - uses: apple-actions/import-codesign-certs@v1
+      with:
+        p12-file-base64: ${{ secrets.APPLE_CERT_FILE }}
+        p12-password: ${{ secrets.APPLE_CERT_PASSWORD }}

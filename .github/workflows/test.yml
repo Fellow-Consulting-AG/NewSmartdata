@@ -11,9 +11,8 @@ jobs:
     steps:
     - name: ls
       run: |
-      pwd
-      ls /
-
+        pwd
+        ls /
     - uses: apple-actions/import-codesign-certs@v1
       with:
         p12-file-base64: ${{ secrets.APPLE_CERT_FILE }}

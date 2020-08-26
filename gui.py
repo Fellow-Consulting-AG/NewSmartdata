@@ -187,7 +187,6 @@ def show_main():
             if values[event] and values[event][-1] not in ("0123456789"):
                 sg.popup_quick_message(
                     "Please enter a valid row number",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -222,7 +221,6 @@ def show_main():
             if validators.url(url) != True:
                 sg.popup_quick_message(
                     "You have to provide a valid URL",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -231,7 +229,6 @@ def show_main():
             elif infor.filehandling.checkfile_exists(ionfile) != True:
                 sg.popup_quick_message(
                     "You have to provide a valid ionfile",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -240,7 +237,6 @@ def show_main():
             elif not programs_list:
                 sg.popup_quick_message(
                     "You have to provide a program",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -249,7 +245,6 @@ def show_main():
             elif not method:
                 sg.popup_quick_message(
                     "You have to provide atleast one method",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -258,7 +253,6 @@ def show_main():
             elif not outputfile:
                 sg.popup_quick_message(
                     "You have to provide output file path",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -267,7 +261,6 @@ def show_main():
             elif not infor.filehandling.checkfile_exists(inputfile):
                 sg.popup_quick_message(
                     "Input File not found",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -276,7 +269,6 @@ def show_main():
             elif end is not None and end < start:
                 sg.popup_quick_message(
                     "Begin value must be greater then End value",
-                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,

@@ -1,3 +1,16 @@
+from programs import programs
+from _version import __version__
+from PySimpleGUI import Text
+from PySimpleGUI import Input
+from PySimpleGUI import Frame
+from PySimpleGUI import FileBrowse
+from PySimpleGUI import Column
+from PySimpleGUI import Button
+from inforion import excelexport
+import validators
+import PySimpleGUI as sg
+import pandas as pd
+import inforion as infor
 import os
 import subprocess
 import sys
@@ -5,25 +18,11 @@ from json import dump as jsondump
 from json import load as jsonload
 from os import path
 
-dir =  '/tmp/QuickLoad'
+dir = '/tmp/QuickLoad'
 if not os.path.exists(dir):
     os.makedirs(dir)
-os.chdir(dir) # just for safety
+os.chdir(dir)  # just for safety
 
-import inforion as infor
-import pandas as pd
-import PySimpleGUI as sg
-import validators
-from inforion import excelexport
-from PySimpleGUI import Button
-from PySimpleGUI import Column
-from PySimpleGUI import FileBrowse
-from PySimpleGUI import Frame
-from PySimpleGUI import Input
-from PySimpleGUI import Text
-
-from _version import __version__
-from programs import programs
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
@@ -60,6 +59,7 @@ root = os.path.dirname(__file__)
 if getattr(sys, '_MEIPASS', False):
     root = getattr(sys, '_MEIPASS')
 icon_image = os.path.join(root, 'quickdataload.ico')
+
 
 def show_main():
     METER_REASON_CANCELLED = "cancelled"
@@ -172,7 +172,8 @@ def show_main():
         [Button("Execute"), Button("Cancel")],
     ]
 
-    window = sg.Window("QuickdataLoad - Main",  layout=layout, icon=icon_image, margins=(10, 10))
+    window = sg.Window("QuickdataLoad - Main",  layout=layout,
+                       icon=icon_image, margins=(10, 10))
     settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
 
     window_extract_active = False
@@ -381,19 +382,20 @@ def show_main():
                         output_folder = values["-OUTPUT-FOLDER-"]
 
                         if validators.length(programs_list,
-                                            1) and validators.length(
-                                                output_folder, 1):
+                                             1) and validators.length(
+                                output_folder, 1):
                             for program in programs_list:
                                 output_path = output_folder + os.sep + program
                                 excelexport.generate_api_template_file(
                                     program, output_path)
                             sg.popup("Template(s) generated!", icon=icon_image)
                         else:
-                            sg.popup_ok("Please, check the form values!", icon=icon_image)
+                            sg.popup_ok(
+                                "Please, check the form values!", icon=icon_image)
                     except Exception as e:
                         infor.logger.exception(e)
-                        sg.popup_ok("Something went wrong! Please check the error logs!", icon=icon_image)
-
+                        sg.popup_ok(
+                            "Something went wrong! Please check the error logs!", icon=icon_image)
 
         window.UnHide()
 
@@ -412,7 +414,8 @@ def open_about():
     Tel: +49 (0)8121 792980
     Email: sales@fellow-consulting.de
     """
-    sg.popup_ok("QuickdataLoad, Version: {}".format(__version__), about_text, icon=icon_image)
+    sg.popup_ok("QuickdataLoad, Version: {}".format(
+        __version__), about_text, icon=icon_image)
 
 
 def open_help():

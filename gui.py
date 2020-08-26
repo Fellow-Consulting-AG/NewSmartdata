@@ -56,6 +56,10 @@ SETTINGS_KEYS_TO_ELEMENT_KEYS = {
     "end": "-ION-END-",
 }
 
+root = os.path.dirname(__file__)
+if getattr(sys, '_MEIPASS', False):
+    root = getattr(sys, '_MEIPASS')
+icon_image = os.path.join(root, 'quickdataload.ico')
 
 def show_main():
     METER_REASON_CANCELLED = "cancelled"
@@ -168,7 +172,7 @@ def show_main():
         [Button("Execute"), Button("Cancel")],
     ]
 
-    window = sg.Window("QuickdataLoad - Main", layout, margins=(10, 10))
+    window = sg.Window("QuickdataLoad - Main",  layout=layout, icon=icon_image, margins=(10, 10))
     settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
 
     window_extract_active = False
@@ -183,6 +187,7 @@ def show_main():
             if values[event] and values[event][-1] not in ("0123456789"):
                 sg.popup_quick_message(
                     "Please enter a valid row number",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -217,6 +222,7 @@ def show_main():
             if validators.url(url) != True:
                 sg.popup_quick_message(
                     "You have to provide a valid URL",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -225,6 +231,7 @@ def show_main():
             elif infor.filehandling.checkfile_exists(ionfile) != True:
                 sg.popup_quick_message(
                     "You have to provide a valid ionfile",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -233,6 +240,7 @@ def show_main():
             elif not programs_list:
                 sg.popup_quick_message(
                     "You have to provide a program",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -241,6 +249,7 @@ def show_main():
             elif not method:
                 sg.popup_quick_message(
                     "You have to provide atleast one method",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -249,6 +258,7 @@ def show_main():
             elif not outputfile:
                 sg.popup_quick_message(
                     "You have to provide output file path",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -257,6 +267,7 @@ def show_main():
             elif not infor.filehandling.checkfile_exists(inputfile):
                 sg.popup_quick_message(
                     "Input File not found",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -265,6 +276,7 @@ def show_main():
             elif end is not None and end < start:
                 sg.popup_quick_message(
                     "Begin value must be greater then End value",
+                    icon=icon_image,
                     keep_on_top=True,
                     text_color="red",
                     no_titlebar=True,
@@ -352,7 +364,8 @@ def show_main():
 
             layout_extract = [[column], [Button("Execute"), Button("Cancel")]]
             window_extract = sg.Window("QuickdataLoad  - Extract",
-                                       layout_extract,
+                                       layout=layout_extract,
+                                       icon=icon_image,
                                        margins=(10, 10))
 
             while True:
@@ -382,12 +395,12 @@ def show_main():
                                 output_path = output_folder + os.sep + program
                                 excelexport.generate_api_template_file(
                                     program, output_path)
-                            sg.popup("Template(s) generated!")
+                            sg.popup("Template(s) generated!", icon=icon_image)
                         else:
-                            sg.popup_ok("Please, check the form values!")
+                            sg.popup_ok("Please, check the form values!", icon=icon_image)
                     except Exception as e:
                         infor.logger.exception(e)
-                        sg.popup_ok("Something went wrong! Please check the error logs!")
+                        sg.popup_ok("Something went wrong! Please check the error logs!", icon=icon_image)
 
 
         window.UnHide()
@@ -407,7 +420,7 @@ def open_about():
     Tel: +49 (0)8121 792980
     Email: sales@fellow-consulting.de
     """
-    sg.popup_ok("QuickdataLoad, Version: {}".format(__version__), about_text)
+    sg.popup_ok("QuickdataLoad, Version: {}".format(__version__), about_text, icon=icon_image)
 
 
 def open_help():
@@ -426,7 +439,7 @@ def open_help():
                          stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE)
     except Exception as e:
-        sg.popup("Cannot open browser.")
+        sg.popup("Cannot open browser.", icon=icon_image)
 
 
 def fill_form_with_settings(window, settings):
@@ -460,7 +473,7 @@ def save_settings(notify, settings_file, settings, values):
         jsondump(settings, f)
 
     if notify:
-        sg.popup("Settings saved")
+        sg.popup("Settings saved", icon=icon_image)
 
 
 show_main()

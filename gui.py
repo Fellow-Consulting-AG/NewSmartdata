@@ -5,11 +5,6 @@ from json import dump as jsondump
 from json import load as jsonload
 from os import path
 
-dir =  '/tmp/QuickLoad'
-if not os.path.exists(dir):
-    os.makedirs(dir)
-os.chdir(dir) # just for safety
-
 import inforion as infor
 import pandas as pd
 import PySimpleGUI as sg
@@ -25,13 +20,18 @@ from PySimpleGUI import Text
 from _version import __version__
 from programs import programs
 
+dir = "/tmp/QuickLoad"
+if not os.path.exists(dir):
+    os.makedirs(dir)
+os.chdir(dir)  # just for safety
+
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
 sg.set_options(font=appFont)
 sg.theme("LightGreen")
 sg.ChangeLookAndFeel("LightGreen")
 
-SETTINGS_FILE = os.path.join(dir, 'settings.json')
+SETTINGS_FILE = os.path.join(dir, "settings.json")
 
 DEFAULT_SETTINGS = {
     "ion_file": None,
@@ -57,9 +57,10 @@ SETTINGS_KEYS_TO_ELEMENT_KEYS = {
 }
 
 root = os.path.dirname(__file__)
-if getattr(sys, '_MEIPASS', False):
-    root = getattr(sys, '_MEIPASS')
-icon_image = os.path.join(root, 'quickdataload.ico')
+if getattr(sys, "_MEIPASS", False):
+    root = getattr(sys, "_MEIPASS")
+icon_image = os.path.join(root, "quickdataload.ico")
+
 
 def show_main():
     METER_REASON_CANCELLED = "cancelled"
@@ -172,7 +173,10 @@ def show_main():
         [Button("Execute"), Button("Cancel")],
     ]
 
-    window = sg.Window("QuickdataLoad - Main",  layout=layout, icon=icon_image, margins=(10, 10))
+    window = sg.Window("QuickdataLoad - Main",
+                       layout=layout,
+                       icon=icon_image,
+                       margins=(10, 10))
     settings = load_settings(SETTINGS_FILE, DEFAULT_SETTINGS)
 
     window_extract_active = False
@@ -355,10 +359,12 @@ def show_main():
             ], )
 
             layout_extract = [[column], [Button("Execute"), Button("Cancel")]]
-            window_extract = sg.Window("QuickdataLoad  - Extract",
-                                       layout=layout_extract,
-                                       icon=icon_image,
-                                       margins=(10, 10))
+            window_extract = sg.Window(
+                "QuickdataLoad  - Extract",
+                layout=layout_extract,
+                icon=icon_image,
+                margins=(10, 10),
+            )
 
             while True:
                 event, values = window_extract.read()
@@ -381,19 +387,22 @@ def show_main():
                         output_folder = values["-OUTPUT-FOLDER-"]
 
                         if validators.length(programs_list,
-                                            1) and validators.length(
-                                                output_folder, 1):
+                                             1) and validators.length(
+                                                 output_folder, 1):
                             for program in programs_list:
                                 output_path = output_folder + os.sep + program
                                 excelexport.generate_api_template_file(
                                     program, output_path)
                             sg.popup("Template(s) generated!", icon=icon_image)
                         else:
-                            sg.popup_ok("Please, check the form values!", icon=icon_image)
+                            sg.popup_ok("Please, check the form values!",
+                                        icon=icon_image)
                     except Exception as e:
                         infor.logger.exception(e)
-                        sg.popup_ok("Something went wrong! Please check the error logs!", icon=icon_image)
-
+                        sg.popup_ok(
+                            "Something went wrong! Please check the error logs!",
+                            icon=icon_image,
+                        )
 
         window.UnHide()
 
@@ -412,7 +421,9 @@ def open_about():
     Tel: +49 (0)8121 792980
     Email: sales@fellow-consulting.de
     """
-    sg.popup_ok("QuickdataLoad, Version: {}".format(__version__), about_text, icon=icon_image)
+    sg.popup_ok("QuickdataLoad, Version: {}".format(__version__),
+                about_text,
+                icon=icon_image)
 
 
 def open_help():

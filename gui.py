@@ -3,23 +3,17 @@ import subprocess
 import sys
 from json import dump as jsondump
 from json import load as jsonload
+from pathlib import Path
 
 import inforion as infor
 import pandas as pd
 import PySimpleGUI as sg
 import validators
 from inforion import excelexport
-from PySimpleGUI import Button
-from PySimpleGUI import Column
-from PySimpleGUI import FileBrowse
-from PySimpleGUI import Frame
-from PySimpleGUI import Input
-from PySimpleGUI import Text
+from PySimpleGUI import Button, Column, FileBrowse, Frame, Input, Text
 
 from _version import __version__
 from programs import programs
-
-from pathlib import Path
 
 dir = str(Path.home()) + "/.QuickdataLoad"
 if not os.path.exists(dir):

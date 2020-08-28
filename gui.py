@@ -1,3 +1,4 @@
+import ntpath
 import os
 import subprocess
 import sys
@@ -5,25 +6,30 @@ from json import dump as jsondump
 from json import load as jsonload
 from pathlib import Path
 
+import PySimpleGUI as sg
+
+dir = str(Path.home()) + "/.QuickdataLoad"
+if not os.path.exists(dir):
+    os.makedirs(dir)
+os.chdir(dir)  # just for safety
+
 import inforion as infor
 import pandas as pd
-import PySimpleGUI as sg
 import validators
-from inforion import excelexport
 from PySimpleGUI import Button
 from PySimpleGUI import Column
 from PySimpleGUI import FileBrowse
 from PySimpleGUI import Frame
 from PySimpleGUI import Input
 from PySimpleGUI import Text
+from inforion import excelexport
+from inforion.transformation.transform import parallelize_tranformation
 
 from _version import __version__
 from programs import programs
 
-dir = str(Path.home()) + "/.QuickdataLoad"
-if not os.path.exists(dir):
-    os.makedirs(dir)
-os.chdir(dir)  # just for safety
+ntpath.basename("a/b/c")
+
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
@@ -404,9 +410,94 @@ def show_main():
                             icon=icon_image,
                         )
 
+        if event == "Transform" and not window_extract_active:
+
+            window_transform_active = True
+            window.Hide()
+
+            def TextLabel(text): return sg.Text(text + ':', justification='r', size=(15, 1))
+
+            column = Column(
+                [
+                    [
+                        Frame(
+                            "Input Data",
+                            [[
+                                Text(),
+                                Column([
+                                    [
+                                        TextLabel("Mapping File"),
+                                        Input(key="-MAPPING-FILE-"),
+                                        FileBrowse(),
+                                    ],
+                                    [
+                                        TextLabel("Main Sheet"),
+                                        Input(key="-MAIN-SHEET-")
+                                    ],
+                                    [
+                                        TextLabel("Input File"),
+                                        Input(key="-INPUT-FILE-"),
+                                        FileBrowse(),
+                                    ],
+                                    [
+                                        TextLabel("Output Folder"),
+                                        sg.Input(key="-OUTPUT-FOLDER-"),
+                                        sg.FolderBrowse(target="-OUTPUT-FOLDER-"),
+                                    ]
+                                ], ),
+                            ]],
+                        )
+                    ],
+                ], )
+
+            layout_transform = [[column], [Button("Execute"), Button("Cancel")]]
+            window_transform = sg.Window('QuickdataLoad  - Transform', icon=icon_image, layout=layout_transform,
+                                         margins=(10, 10))
+
+            while True:
+                event, values = window_transform.read()
+
+                if event == sg.WIN_CLOSED or event == 'Cancel':
+                    window_transform.Close()
+                    window_transform_active = False
+                    break
+
+                if event == 'Execute':
+
+                    try:
+                        mapping_file = values["-MAPPING-FILE-"]
+                        main_sheet = values["-MAIN-SHEET-"]
+                        input_file = values["-INPUT-FILE-"]
+                        output_folder = values["-OUTPUT-FOLDER-"]
+
+                        if validators.length(mapping_file, 1) \
+                                and validators.length(main_sheet, 1) \
+                                and validators.length(input_file, 1) \
+                                and validators.length(output_folder, 1):
+
+                            output_file_name = "output_" + path_leaf(input_file)
+                            output_file = output_folder + os.sep + output_file_name
+                            input_data = pd.read_excel(input_file, dtype=str)
+                            parallelize_tranformation(mapping_file, main_sheet, input_data, output_file)
+                            sg.popup("Transformation successful! \n" + output_file)
+                        else:
+                            sg.popup_ok("Please, check the form values!",
+                                        icon=icon_image)
+                    except Exception as e:
+                        infor.logger.exception(e)
+                        sg.popup_ok(
+                            "Something went wrong! Please check the error logs!",
+                            icon=icon_image,
+                        )
+
         window.UnHide()
 
     window.close()
+
+
+def path_leaf(path):
+    head, tail = ntpath.split(path)
+    return tail or ntpath.basename(head)
 
 
 def on_progress(total, processed):

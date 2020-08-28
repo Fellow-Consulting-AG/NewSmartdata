@@ -3,7 +3,7 @@ import subprocess
 import sys
 from json import dump as jsondump
 from json import load as jsonload
-from os import path
+from pathlib import Path
 
 import inforion as infor
 import pandas as pd
@@ -20,7 +20,7 @@ from PySimpleGUI import Text
 from _version import __version__
 from programs import programs
 
-dir = "/tmp/QuickLoad"
+dir = str(Path.home()) + "/.QuickdataLoad"
 if not os.path.exists(dir):
     os.makedirs(dir)
 os.chdir(dir)  # just for safety

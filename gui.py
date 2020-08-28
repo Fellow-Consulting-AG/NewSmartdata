@@ -1,4 +1,3 @@
-import os
 import ntpath
 import os
 import subprocess
@@ -6,18 +5,13 @@ import sys
 from json import dump as jsondump
 from json import load as jsonload
 
-import PySimpleGUI as sg
 import inforion as infor
 import pandas as pd
+import PySimpleGUI as sg
 import validators
-from PySimpleGUI import Button
-from PySimpleGUI import Column
-from PySimpleGUI import FileBrowse
-from PySimpleGUI import Frame
-from PySimpleGUI import Input
-from PySimpleGUI import Text
 from inforion import excelexport
 from inforion.transformation.transform import parallelize_tranformation
+from PySimpleGUI import Button, Column, FileBrowse, Frame, Input, Text
 
 from _version import __version__
 from programs import programs

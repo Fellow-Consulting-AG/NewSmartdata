@@ -413,7 +413,8 @@ def show_main():
             window_transform_active = True
             window.Hide()
 
-            def TextLabel(text): return sg.Text(text + ':', justification='r', size=(15, 1))
+            def TextLabel(text): return sg.Text(
+                text + ':', justification='r', size=(15, 1))
 
             column = Column(
                 [
@@ -440,7 +441,8 @@ def show_main():
                                     [
                                         TextLabel("Output Folder"),
                                         sg.Input(key="-OUTPUT-FOLDER-"),
-                                        sg.FolderBrowse(target="-OUTPUT-FOLDER-"),
+                                        sg.FolderBrowse(
+                                            target="-OUTPUT-FOLDER-"),
                                     ]
                                 ], ),
                             ]],
@@ -448,7 +450,8 @@ def show_main():
                     ],
                 ], )
 
-            layout_transform = [[column], [Button("Execute"), Button("Cancel")]]
+            layout_transform = [[column], [
+                Button("Execute"), Button("Cancel")]]
             window_transform = sg.Window('QuickdataLoad  - Transform', icon=icon_image, layout=layout_transform,
                                          margins=(10, 10))
 
@@ -473,11 +476,14 @@ def show_main():
                                 and validators.length(input_file, 1) \
                                 and validators.length(output_folder, 1):
 
-                            output_file_name = "output_" + path_leaf(input_file)
+                            output_file_name = "output_" + \
+                                path_leaf(input_file)
                             output_file = output_folder + os.sep + output_file_name
                             input_data = pd.read_excel(input_file, dtype=str)
-                            parallelize_tranformation(mapping_file, main_sheet, input_data, output_file)
-                            sg.popup("Transformation successful! \n" + output_file)
+                            parallelize_tranformation(
+                                mapping_file, main_sheet, input_data, output_file)
+                            sg.popup(
+                                "Transformation successful! \n" + output_file)
                         else:
                             sg.popup_ok("Please, check the form values!",
                                         icon=icon_image)

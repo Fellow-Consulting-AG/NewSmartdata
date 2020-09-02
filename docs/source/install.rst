@@ -8,6 +8,7 @@ How to install for MacOS
 
 When talking about a MacOS environment, the right and only way of installing the **QuickdataLoad App** is by downloading the **zip folder**.
 Here is the link for the download: QuickdataLoadApp_.
+
 .. _QuickdataLoadApp: https://github.com/Fellow-Consulting-AG/NewSmartdata/releases/tag/v1.0.2
 
 .. image:: images/MacOsDownload.png

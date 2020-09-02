@@ -32,6 +32,9 @@ If you followed the steps correctly, you should get an output to wait while down
 
 
 
+
+
+
 How to install for Windows
 ----------------------------
 

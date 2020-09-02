@@ -63,6 +63,10 @@ The second command is: **Transform**.
 
 The last available command is calles: **Load**. It is the same window as the starting one, but even if it seems more complicated than the others, just following this simple steps will help and guide you.
 
+.. image:: images/LoadFirst.png
+    :width: 500
+    :align: center
+
 .. image:: images/Load.png
     :width: 500
     :align: center

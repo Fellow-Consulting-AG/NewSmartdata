@@ -105,8 +105,7 @@ def show_main():
                             [
                                 Text("ION File:", size=(14, 1)),
                                 Input(key="-ION-FILE-"),
-                                FileBrowse(file_types=("ION API File",
-                                                       "*.ionapi")),
+                                FileBrowse(),
                             ],
                             [
                                 Text("M3 Company/Div:"),

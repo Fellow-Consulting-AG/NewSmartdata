@@ -7,6 +7,7 @@ QuickdataLoad is a Python 3 app.
    :caption: Usage
    :maxdepth: 2
 
+   introduction
    install
    run
 

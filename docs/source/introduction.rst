@@ -12,3 +12,4 @@ In order to get started with the **QuickdataLoad Tool**, just install it.
 
 .. image:: images/QuickdataLoad.png
    :width: 500
+   :align: center

@@ -11,4 +11,4 @@ This software installation will simply provide an intuitive Data Loading Workspa
 In order to get started with the **QuickdataLoad Tool**, just install it.
 
 .. image:: images/QuickdataLoad.png
-   :width: 40pt
+   :width: 500

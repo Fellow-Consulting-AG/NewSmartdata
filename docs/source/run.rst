@@ -1,33 +1,61 @@
-------------------
-QuickdataLoad App
-------------------
+==========
+Commands
+==========
 
-After installing the **QuickdataLoad Tool App** a new window will appear, as shown below. The main purpose is to be able to execute commands according to the desired Logon information and Input Data. In the Logon Information it is essential that you specify which M3 company and division you are working on.
+After installing the **QuickdataLoad App** a new window will appear, as shown below. The main purpose is to be able to execute commands according to the desired Logon information and Input Data. 
 
-.. image:: images/New_QuickdataLoad.jpg
+.. image:: images/FirstScreen.png
+    :width: 500
     :align: center
-MacOs
 
-.. image:: images/Windows_QuickdataLoad.jpg
+Nevertheless, there are various commands available at the upper screen of your MacOs or at the upper part of the app window (Windows), where you can *extract, transform or load* data files.
+
+.. image:: images/Commands.png
+    :width: 500
     :align: center
-Windows
 
-Nevertheless, there are various commands available at the upper screen of your MacOs (as shown below) or at the upper part of the app window (Windows), where you can *extract, load or merge* data files.
+Now, we are going to go through the three different commands step by step and show how it really works. We will go as follows: **Extract, Transform and Load**.
 
-.. image:: images/Commands_QuickdataLoad.jpg
+
+``EXTRACT```
+--------------
+
+Starting with the first command: **Extract**. Just click on it on the command options to get things started.
+
+.. image:: images/Extract.png
+    :width: 500
     :align: center
-MacOs
 
-.. image:: images/Windows_Commands.jpg
+.. image:: images/ExtractWindow.png
+    :width: 500
     :align: center
-Windows
 
-As an example we can extract data by just choosing the program type and browsing into your computer to allocate the desired output file. That means, the main process of retrieving data out of the program source to an output file will be executed.
+The program is elaborated in a very intuitive way since you just have to decide which *program* you want extract the data from and where (in which directory) you want to save your new outputfile.
+For example, we can choose the first two programs for extraction, *"AAS390MI"* and *"AAS910MI"**, and then decide to store the output file in our ``Downloads/`` folder.
 
-.. image:: images/Extract_QuickdataLoad.jpg
+.. image:: images/ExampleExtract.png
+    :width: 500
     :align: center
-MacOs
 
-.. image:: images/Windows_Extract.jpg
+Finally, just execute the command to get your desired extraction output files in your Downloads directory.
+
+.. image:: images/Execute.png
+    :width: 500
     :align: center
-Windows
+
+.. image:: images/outputFile.png
+    :width: 500
+    :align: center
+
+That is exactly how the extraction command works!
+
+
+``TRANSFORM``
+---------------
+
+
+
+
+
+``LOAD``
+----------

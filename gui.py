@@ -1,3 +1,16 @@
+from programs import programs
+from _version import __version__
+from PySimpleGUI import Text
+from PySimpleGUI import Input
+from PySimpleGUI import Frame
+from PySimpleGUI import FileBrowse
+from PySimpleGUI import Column
+from PySimpleGUI import Button
+from inforion.transformation.transform import parallelize_tranformation
+from inforion import excelexport
+import validators
+import pandas as pd
+import inforion as infor
 import ntpath
 import os
 import subprocess
@@ -14,21 +27,6 @@ if not os.path.exists(dir):
     os.makedirs(dir)
 os.chdir(dir)  # just for safety
 
-import inforion as infor
-import pandas as pd
-import PySimpleGUI as sg
-import validators
-from inforion import excelexport
-from inforion.transformation.transform import parallelize_tranformation
-from PySimpleGUI import Button
-from PySimpleGUI import Column
-from PySimpleGUI import FileBrowse
-from PySimpleGUI import Frame
-from PySimpleGUI import Input
-from PySimpleGUI import Text
-
-from _version import __version__
-from programs import programs
 
 ntpath.basename("a/b/c")
 
@@ -482,11 +480,13 @@ def show_main():
                                 and validators.length(input_file, 1)
                                 and validators.length(output_folder, 1)):
 
-                            output_file_name = "output_" + path_leaf(input_file)
+                            output_file_name = "output_" + \
+                                path_leaf(input_file)
                             output_file = output_folder + os.sep + output_file_name
                             threading.Thread(target=transform, args=(mapping_file, main_sheet, input_file,
                                                                      output_file)).start()
-                            sg.popup("Transformation file result will generated at: \n" + output_file)
+                            sg.popup(
+                                "Transformation file result will generated at: \n" + output_file)
                         else:
                             sg.popup_ok("Please, check the form values!",
                                         icon=icon_image)
@@ -504,7 +504,8 @@ def show_main():
 
 def transform(mapping_file, main_sheet, input_file, output_file):
     input_data = pd.read_excel(input_file, dtype=str)
-    parallelize_tranformation(mapping_file, main_sheet, input_data, output_file)
+    parallelize_tranformation(
+        mapping_file, main_sheet, input_data, output_file)
 
 
 def path_leaf(path):

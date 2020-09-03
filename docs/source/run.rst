@@ -22,7 +22,7 @@ Now, we are going to go through the three different commands step by step and sh
 
 Starting with the first command: **Extract**. Just click on it on the command options to get things started.
 
-.. image:: images/Extract.png
+.. image:: images/LoadCommand.png
     :width: 500
     :align: center
 
@@ -53,9 +53,35 @@ That is exactly how the extraction command works!
 ``TRANSFORM``
 ---------------
 
-The second command is: **Transform**. 
+The second command is: **Transform**. Just click on it on the command options to start with the transformation of the data.
 
+.. image:: images/TransformCommand.png
+    :width: 500
+    :align: center
 
+.. image:: images/Transform.png
+    :width: 500
+    :align: center
+
+There are a few parameters that are necessary to execute the transformation of data.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+   * - -a or --mappingfile
+     - This parameter is used to provide the mapping file based on which transformation will be done.
+   * - -b or --mainsheet
+     - This parameter is used to define the main sheet which will contain the mapping fields for transformation.
+   * - -i or --inputfile
+     - This parameter is used to provide the input data.
+
+Finally, after introducing all these files, the only thing that is left is to decide on which output folder you want to save all the process.
+
+.. image:: images/TransformExecute.png
+    :width: 500
+    :align: center
 
 
 ``LOAD``

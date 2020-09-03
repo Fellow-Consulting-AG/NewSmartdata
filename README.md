@@ -2,6 +2,8 @@
 
 ## QuickdataLoad
 
+https://new-smartdata-tool-fur-infor.readthedocs.io/en/latest/index.html
+
 The **QuickdataLoad Tool** is a Python3 app and its purpose is to efficiently
 execute the Data Loading, from external systems to the _M3 Cloud platform_. It
 all happens via **Infor ION** (Intelligent Open Network), which simplifies

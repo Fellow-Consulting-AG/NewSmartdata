@@ -10,7 +10,7 @@ The QuickdataLoad Tool is a Python3 app and its purpose is to efficiently execut
    introduction
    install
    run
-   requirements
+   requirement
 
 
 

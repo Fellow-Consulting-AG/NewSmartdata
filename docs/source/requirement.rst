@@ -2,6 +2,12 @@
 Requirements
 ================
 
+Before getting into the use of the app, it is important that you have the following requirements:
+
+- inforion==2.24
+- PySimpleGUI==4.26.0
+- pandas==1.1.1
+
 There are just a few requirements that must be considered when running the **QuickdataLoad App**. As we have seen in the *Commands* section, in order to execute every single one of the three described commands (Extract, Transform and Load) some files are highly necessary.
 
 ``EXTRACT``

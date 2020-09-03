@@ -2,6 +2,7 @@ import ntpath
 import os
 import subprocess
 import sys
+import threading
 from json import dump as jsondump
 from json import load as jsonload
 from pathlib import Path
@@ -481,14 +482,11 @@ def show_main():
                                 and validators.length(input_file, 1)
                                 and validators.length(output_folder, 1)):
 
-                            output_file_name = "output_" + path_leaf(
-                                input_file)
+                            output_file_name = "output_" + path_leaf(input_file)
                             output_file = output_folder + os.sep + output_file_name
-                            input_data = pd.read_excel(input_file, dtype=str)
-                            parallelize_tranformation(mapping_file, main_sheet,
-                                                      input_data, output_file)
-                            sg.popup("Transformation successful! \n" +
-                                     output_file)
+                            threading.Thread(target=transform, args=(mapping_file, main_sheet, input_file,
+                                                                     output_file)).start()
+                            sg.popup("Transformation file result will generated at: \n" + output_file)
                         else:
                             sg.popup_ok("Please, check the form values!",
                                         icon=icon_image)
@@ -502,6 +500,11 @@ def show_main():
         window.UnHide()
 
     window.close()
+
+
+def transform(mapping_file, main_sheet, input_file, output_file):
+    input_data = pd.read_excel(input_file, dtype=str)
+    parallelize_tranformation(mapping_file, main_sheet, input_data, output_file)
 
 
 def path_leaf(path):

@@ -461,6 +461,7 @@ def show_main():
                 margins=(10, 10),
             )
 
+            thread_transform = None
             while True:
                 event, values = window_transform.read()
 
@@ -468,6 +469,12 @@ def show_main():
                     window_transform.Close()
                     window_transform_active = False
                     break
+
+                elif event == 'Transform_End':
+                    sg.popup("Transformation ended", icon=icon_image)
+                    if thread_transform is not None:
+                        thread_transform.join(timeout=0)
+                        thread_transform = None
 
                 if event == "Execute":
 
@@ -484,9 +491,10 @@ def show_main():
 
                             output_file_name = "output_" + path_leaf(input_file)
                             output_file = output_folder + os.sep + output_file_name
-                            threading.Thread(target=transform, args=(mapping_file, main_sheet, input_file,
-                                                                     output_file)).start()
-                            sg.popup("Transformation file result will generated at: \n" + output_file)
+                            thread_transform = threading.Thread(target=transform, args=(mapping_file, main_sheet, input_file,
+                                                                              output_file, window_transform))
+                            thread_transform.start()
+                            sg.popup("Transformation file result will generated at: \n" + output_file, icon=icon_image)
                         else:
                             sg.popup_ok("Please, check the form values!",
                                         icon=icon_image)
@@ -502,9 +510,11 @@ def show_main():
     window.close()
 
 
-def transform(mapping_file, main_sheet, input_file, output_file):
+def transform(mapping_file, main_sheet, input_file, output_file, win):
     input_data = pd.read_excel(input_file, dtype=str)
-    parallelize_tranformation(mapping_file, main_sheet, input_data, output_file)
+    parallelize_tranformation(mapping_file, main_sheet, input_data, output_file, n_cores=1)
+    # TODO - Use a Queue to notify GUI
+    # win.write_event_value("Transform_End", "Transformed file generated at: \n" + output_file)
 
 
 def path_leaf(path):
@@ -582,4 +592,5 @@ def save_settings(notify, settings_file, settings, values):
         sg.popup("Settings saved", icon=icon_image)
 
 
-show_main()
+if __name__ == '__main__':
+    show_main()

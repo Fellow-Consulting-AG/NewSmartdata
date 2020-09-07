@@ -1,17 +1,3 @@
-from programs import programs
-from _version import __version__
-from PySimpleGUI import Text
-from PySimpleGUI import Input
-from PySimpleGUI import Frame
-from PySimpleGUI import FileBrowse
-from PySimpleGUI import Column
-from PySimpleGUI import Button
-from inforion.transformation.transform import parallelize_tranformation
-from inforion import excelexport
-import validators
-import PySimpleGUI as sg
-import pandas as pd
-import inforion as infor
 import ntpath
 import os
 import subprocess
@@ -21,6 +7,17 @@ from json import dump as jsondump
 from json import load as jsonload
 from pathlib import Path
 from queue import Queue
+
+import inforion as infor
+import pandas as pd
+import PySimpleGUI as sg
+import validators
+from inforion import excelexport
+from inforion.transformation.transform import parallelize_tranformation
+from PySimpleGUI import Button, Column, FileBrowse, Frame, Input, Text
+
+from _version import __version__
+from programs import programs
 
 dir = str(Path.home()) + "/.QuickdataLoad"
 if not os.path.exists(dir):

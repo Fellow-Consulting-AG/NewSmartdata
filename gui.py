@@ -8,6 +8,11 @@ from json import load as jsonload
 from pathlib import Path
 from queue import Queue
 
+dir = str(Path.home()) + "/.QuickdataLoad"
+if not os.path.exists(dir):
+    os.makedirs(dir)
+os.chdir(dir)  # just for safety
+
 import inforion as infor
 import pandas as pd
 import PySimpleGUI as sg
@@ -23,11 +28,6 @@ from PySimpleGUI import Text
 
 from _version import __version__
 from programs import programs
-
-dir = str(Path.home()) + "/.QuickdataLoad"
-if not os.path.exists(dir):
-    os.makedirs(dir)
-os.chdir(dir)  # just for safety
 
 ntpath.basename("a/b/c")
 

@@ -5,13 +5,8 @@ import sys
 import threading
 from json import dump as jsondump
 from json import load as jsonload
-from queue import Queue
 from pathlib import Path
-
-dir = str(Path.home()) + "/.QuickdataLoad"
-if not os.path.exists(dir):
-    os.makedirs(dir)
-os.chdir(dir)  # just for safety
+from queue import Queue
 
 import inforion as infor
 import pandas as pd
@@ -29,8 +24,12 @@ from PySimpleGUI import Text
 from _version import __version__
 from programs import programs
 
-ntpath.basename("a/b/c")
+dir = str(Path.home()) + "/.QuickdataLoad"
+if not os.path.exists(dir):
+    os.makedirs(dir)
+os.chdir(dir)  # just for safety
 
+ntpath.basename("a/b/c")
 
 sg.theme("SystemDefault")
 appFont = ("Helvetica", 13)
@@ -69,6 +68,7 @@ if getattr(sys, "_MEIPASS", False):
 icon_image = os.path.join(root, "quickdataload.ico")
 
 notifications = Queue()
+
 
 def show_main():
     METER_REASON_CANCELLED = "cancelled"
@@ -491,11 +491,24 @@ def show_main():
                                 and validators.length(input_file, 1)
                                 and validators.length(output_folder, 1)):
 
-                            output_file_name = "output_" + path_leaf(input_file)
+                            output_file_name = "output_" + path_leaf(
+                                input_file)
                             output_file = output_folder + os.sep + output_file_name
-                            threading.Thread(target=transform, args=(mapping_file, main_sheet, input_file, output_file,
-                                                                     notifications)).start()
-                            sg.popup("Transformation file result will generated at: \n" + output_file, icon=icon_image)
+                            threading.Thread(
+                                target=transform,
+                                args=(
+                                    mapping_file,
+                                    main_sheet,
+                                    input_file,
+                                    output_file,
+                                    notifications,
+                                ),
+                            ).start()
+                            sg.popup(
+                                "Transformation file result will generated at: \n"
+                                + output_file,
+                                icon=icon_image,
+                            )
                         else:
                             sg.popup_ok("Please, check the form values!",
                                         icon=icon_image)
@@ -514,11 +527,17 @@ def show_main():
 def transform(mapping_file, main_sheet, input_file, output_file, q):
     try:
         input_data = pd.read_excel(input_file, dtype=str)
-        parallelize_tranformation(mapping_file, main_sheet, input_data, output_file, n_cores=1)
-        q.put(("Transform_End", "Transformed file generated at: \n" + output_file))
+        parallelize_tranformation(mapping_file,
+                                  main_sheet,
+                                  input_data,
+                                  output_file,
+                                  n_cores=1)
+        q.put(("Transform_End",
+               "Transformed file generated at: \n" + output_file))
     except Exception as e:
         infor.logger.exception(e)
-        q.put(("Transform_End", "Something went wrong! Please check the error logs!"))
+        q.put(("Transform_End",
+               "Something went wrong! Please check the error logs!"))
 
 
 def path_leaf(path):
@@ -596,5 +615,5 @@ def save_settings(notify, settings_file, settings, values):
         sg.popup("Settings saved", icon=icon_image)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     show_main()
